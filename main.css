@@ -1,3 +1,39 @@
-h1 {
-  color: red;
+* {
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0;
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  height: 800px;
+  width: 800px;
+  background-color: black;
+  border-radius: 10px;
+}
+.cell {
+  border: 1px solid violet;
+  font-size: 10px;
+  background-color: black;
+  border-radius: 10px;
+}
+.wall {
+  background-color: blueviolet;
+  color: white;
+  border-radius: 10px;
+}
+.pacman {
+  background-image: url("pacman.png");
+  background-size: contain;
 }
