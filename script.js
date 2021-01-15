@@ -1,5 +1,7 @@
 const grid = document.querySelector(".grid");
 const modal = document.querySelector(".modal");
+const modalImg = document.getElementById("modID");
+const startButton = document.querySelector("button");
 const width = 20;
 const cells = [];
 const walls = [];
@@ -206,6 +208,12 @@ sanctum.forEach((cell) => {
   document.getElementById(idCell).classList.add("sanctum");
 });
 
+startButton.addEventListener("click", () => {
+  // gameIsPlaying();
+  console.log(`${gameIsPlaying}`);
+  startButton.style.display = "none";
+});
+
 //locating pacman
 let pacman = 312;
 let ghost1 = 168;
@@ -240,6 +248,24 @@ const rightMov = 1;
 const upMov = -width;
 const downMov = width;
 const movArray = [leftMov, rightMov, upMov, downMov];
+document.addEventListener("keyup", (event) => {
+  if (event.key === "w") {
+    console.log(`You hit ${event.key}`);
+    movChange(upMov);
+  }
+  if (event.key === "a") {
+    console.log(`You hit ${event.key}`);
+    movChange(leftMov);
+  }
+  if (event.key === "s") {
+    console.log(`You hit ${event.key}`);
+    movChange(downMov);
+  }
+  if (event.key === "d") {
+    console.log(`You hit ${event.key}`);
+    movChange(rightMov);
+  }
+});
 function movChange(direction) {
   //checks if the move is legal
   if (cells[pacman + direction].classList.contains("wall")) {
@@ -269,40 +295,35 @@ function movChange(direction) {
           curScore++;
           scoreSpan.textContent = curScore;
         }
-        if (cells[pacman + direction].classList.contains("ghost1")) {
-          cells[pacman + direction].classList.remove("pacman");
-          clearInterval(directionOfTravel);
-          pacman = 210;
-          currentLives--;
-          lifeSpan.textContent = currentLives;
-          deathModal();
-          return;
-        }
+        const contactCheck = setInterval(() => {
+          if (
+            cells[pacman + direction].classList.contains("ghost1") ||
+            cells[pacman + direction].classList.contains("ghost2") ||
+            cells[pacman + direction].classList.contains("ghost3") ||
+            cells[pacman + direction].classList.contains("ghost4")
+          ) {
+            cells[pacman + direction].classList.remove("pacman");
+            cells[pacman].classList.remove("pacman");
+            clearInterval(directionOfTravel);
+            pacman = 314;
+            currentLives--;
+            lifeSpan.textContent = currentLives;
+            clearInterval(contactCheck);
+            if (currentLives === 0) {
+              putinModal();
+            } else {
+              deathModal();
+            }
+            return;
+          }
+        }, 100);
+
         pacman += direction;
         cells[pacman].classList.add("pacman");
       }
     }, 300);
   }
 }
-
-document.addEventListener("keyup", (event) => {
-  if (event.key === "w") {
-    console.log(`You hit${event.key}`);
-    movChange(upMov);
-  }
-  if (event.key === "a") {
-    console.log(`You hit${event.key}`);
-    movChange(leftMov);
-  }
-  if (event.key === "s") {
-    console.log(`You hit${event.key}`);
-    movChange(downMov);
-  }
-  if (event.key === "d") {
-    console.log(`You hit${event.key}`);
-    movChange(rightMov);
-  }
-});
 
 //ghost movements -- random
 const randomMovement = function () {
@@ -315,43 +336,34 @@ let ghostOneIsMoving = false;
 
 function ghost1Mov(direction) {
   ghostOneIsMoving = true;
-  console.log(`${ghostOneIsMoving}`);
+  // console.log(`${ghostOneIsMoving}`);
   if (cells[ghost1 + direction].classList.contains("wall")) {
-    console.log("the fail safe has been triggered");
+    // console.log("the fail safe has been triggered");
     ghost1Mov(randomMovement());
-    console.log(`${ghostOneIsMoving}`);
+    // console.log(`${ghostOneIsMoving}`);
     return;
   }
   //if it is, trigger set interval
   else if (!cells[ghost1 + direction].classList.contains("wall")) {
     clearInterval(directionOfTravelGhost1);
     directionOfTravelGhost1 = setInterval(() => {
-      console.log("I am now moving");
+      // console.log("I am now moving");
 
       //rotation
       //to come
       //clears if hits an obstacle
       if (cells[ghost1 + direction].classList.contains("wall")) {
         clearInterval(directionOfTravelGhost1);
-        console.log("interval cleared");
+        // console.log("interval cleared");
         // ghostOneIsMoving = false;
         ghost1Mov(randomMovement());
-        console.log(`${ghostOneIsMoving}`);
+        // console.log(`${ghostOneIsMoving}`);
         keyControl = 0;
       }
       //continues if the way is clear
       if (!cells[ghost1 + direction].classList.contains("wall")) {
-        console.log("ghost says the way is clear");
+        // console.log("ghost says the way is clear");
         cells[ghost1].classList.remove("ghost1");
-        if (cells[ghost1 + direction].classList.contains("pacman")) {
-          cells[ghost1 + direction].classList.remove("pacman");
-          clearInterval(directionOfTravel);
-          pacman = 312;
-          currentLives--;
-          lifeSpan.textContent = currentLives;
-          calcHighScore();
-          deathModal();
-        }
         ghost1 += direction;
         cells[ghost1].classList.add("ghost1");
       }
@@ -371,43 +383,35 @@ let ghostTwoIsMoving = false;
 
 function ghost2Mov(direction) {
   ghostTwoIsMoving = true;
-  console.log(`${ghostTwoIsMoving}`);
+  // console.log(`${ghostTwoIsMoving}`);
   if (cells[ghost2 + direction].classList.contains("wall")) {
-    console.log("the fail safe has been triggered");
+    // console.log("the fail safe has been triggered");
     ghost2Mov(randomMovement());
-    console.log(`${ghostTwoIsMoving}`);
+    // console.log(`${ghostTwoIsMoving}`);
     return;
   }
   //if it is, trigger set interval
   else if (!cells[ghost2 + direction].classList.contains("wall")) {
     clearInterval(directionOfTravelGhost2);
     directionOfTravelGhost2 = setInterval(() => {
-      console.log("Ghost 2 is now moving");
+      // console.log("Ghost 2 is now moving");
 
       //rotation
       //to come
       //clears if hits an obstacle
       if (cells[ghost2 + direction].classList.contains("wall")) {
         clearInterval(directionOfTravelGhost2);
-        console.log("interval cleared");
+        // console.log("interval cleared");
         // ghostOneIsMoving = false;
         ghost2Mov(randomMovement());
-        console.log(`${ghostTwoIsMoving}`);
+        // console.log(`${ghostTwoIsMoving}`);
         keyControl = 0;
       }
       //continues if the way is clear
       if (!cells[ghost2 + direction].classList.contains("wall")) {
-        console.log("ghost 2 says the way is clear");
+        // console.log("ghost 2 says the way is clear");
         cells[ghost2].classList.remove("ghost2");
-        if (cells[ghost2 + direction].classList.contains("pacman")) {
-          cells[ghost2 + direction].classList.remove("pacman");
-          clearInterval(directionOfTravel);
-          pacman = 312;
-          currentLives--;
-          lifeSpan.textContent = currentLives;
-          calcHighScore();
-          deathModal();
-        }
+
         ghost2 += direction;
         cells[ghost2].classList.add("ghost2");
       }
@@ -422,43 +426,35 @@ let ghostThreeIsMoving = false;
 
 function ghost3Mov(direction) {
   ghostThreeIsMoving = true;
-  console.log(`${ghostThreeIsMoving}`);
+  // console.log(`${ghostThreeIsMoving}`);
   if (cells[ghost3 + direction].classList.contains("wall")) {
-    console.log("the fail safe has been triggered");
+    // console.log("the fail safe has been triggered");
     ghost3Mov(randomMovement());
-    console.log(`${ghostThreeIsMoving}`);
+    // console.log(`${ghostThreeIsMoving}`);
     return;
   }
   //if it is, trigger set interval
   else if (!cells[ghost3 + direction].classList.contains("wall")) {
     clearInterval(directionOfTravelGhost3);
     directionOfTravelGhost3 = setInterval(() => {
-      console.log("Ghost 3 is now moving");
+      // console.log("Ghost 3 is now moving");
 
       //rotation
       //to come
       //clears if hits an obstacle
       if (cells[ghost3 + direction].classList.contains("wall")) {
         clearInterval(directionOfTravelGhost3);
-        console.log("interval cleared");
+        // console.log("interval cleared");
         // ghostOneIsMoving = false;
         ghost3Mov(randomMovement());
-        console.log(`${ghostThreeIsMoving}`);
+        // console.log(`${ghostThreeIsMoving}`);
         keyControl = 0;
       }
       //continues if the way is clear
       if (!cells[ghost3 + direction].classList.contains("wall")) {
-        console.log("ghost 3 says the way is clear");
+        // console.log("ghost 3 says the way is clear");
         cells[ghost3].classList.remove("ghost3");
-        if (cells[ghost3 + direction].classList.contains("pacman")) {
-          cells[ghost3 + direction].classList.remove("pacman");
-          clearInterval(directionOfTravel);
-          pacman = 312;
-          currentLives--;
-          lifeSpan.textContent = currentLives;
-          calcHighScore();
-          deathModal();
-        }
+
         ghost3 += direction;
         cells[ghost3].classList.add("ghost3");
       }
@@ -474,43 +470,35 @@ let ghostFourIsMoving = false;
 
 function ghost4Mov(direction) {
   ghostFourIsMoving = true;
-  console.log(`${ghostFourIsMoving}`);
+  // console.log(`${ghostFourIsMoving}`);
   if (cells[ghost4 + direction].classList.contains("wall")) {
-    console.log("the fail safe has been triggered");
+    // console.log("the fail safe has been triggered");
     ghost4Mov(randomMovement());
-    console.log(`${ghostFourIsMoving}`);
+    // console.log(`${ghostFourIsMoving}`);
     return;
   }
   //if it is, trigger set interval
   else if (!cells[ghost4 + direction].classList.contains("wall")) {
     clearInterval(directionOfTravelGhost4);
     directionOfTravelGhost4 = setInterval(() => {
-      console.log("Ghost 4 is now moving");
+      // console.log("Ghost 4 is now moving");
 
       //rotation
       //to come
       //clears if hits an obstacle
       if (cells[ghost4 + direction].classList.contains("wall")) {
         clearInterval(directionOfTravelGhost4);
-        console.log("interval cleared");
+        // console.log("interval cleared");
         // ghostOneIsMoving = false;
         ghost4Mov(randomMovement());
-        console.log(`${ghostFourIsMoving}`);
+        // console.log(`${ghostFourIsMoving}`);
         keyControl = 0;
       }
       //continues if the way is clear
       if (!cells[ghost4 + direction].classList.contains("wall")) {
-        console.log("ghost 4 says the way is clear");
+        // console.log("ghost 4 says the way is clear");
         cells[ghost4].classList.remove("ghost4");
-        if (cells[ghost4 + direction].classList.contains("pacman")) {
-          cells[ghost4 + direction].classList.remove("pacman");
-          clearInterval(directionOfTravel);
-          pacman = 312;
-          currentLives--;
-          lifeSpan.textContent = currentLives;
-          calcHighScore();
-          deathModal();
-        }
+
         ghost4 += direction;
         cells[ghost4].classList.add("ghost4");
       }
@@ -526,7 +514,15 @@ function deathModal() {
   setTimeout(() => {
     modal.style.display = "none";
     modal.innerHTML = "";
-  }, 800);
+  }, 700);
+}
+function putinModal() {
+  modal.style.display = "block";
+  modal.innerHTML = `💀🏴‍☠️GAME☠️☠️OVER🏴‍☠️💀`;
+  setTimeout(() => {
+    modal.style.display = "none";
+    modal.innerHTML = "";
+  }, 700);
 }
 function calcHighScore() {
   if (curScore > highscore) {
