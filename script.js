@@ -172,10 +172,13 @@ lifeSpan.textContent = currentLives;
 let highscore = localStorage.getItem("localHighscore");
 highScoreSpan.textContent = highscore;
 //creating grid
-for (index = 0; index < width ** 2; index++) {
+for (let index = 0; index < width ** 2; index++) {
   const cell = document.createElement("div");
   cell.classList.add("cell");
   cell.setAttribute("id", index);
+  cell.setAttribute("row", Math.floor(index / width));
+
+  cell.setAttribute("column", Math.floor(index % width));
   grid.appendChild(cell);
   cells.push(cell);
   cell.innerHTML = index;
@@ -194,6 +197,49 @@ for (index = 0; index < width ** 2; index++) {
     walls.push(cell);
   }
 }
+//rows
+const row1 = cells.filter((cell) => cell.id < 20);
+const row2 = cells.filter((cell) => cell.id >= 20 && cell.id < 40);
+const row3 = cells.filter((cell) => cell.id >= 40 && cell.id < 60);
+const row4 = cells.filter((cell) => cell.id >= 60 && cell.id < 80);
+const row5 = cells.filter((cell) => cell.id >= 80 && cell.id < 100);
+const row6 = cells.filter((cell) => cell.id >= 100 && cell.id < 120);
+const row7 = cells.filter((cell) => cell.id >= 120 && cell.id < 140);
+const row8 = cells.filter((cell) => cell.id >= 140 && cell.id < 160);
+const row9 = cells.filter((cell) => cell.id >= 160 && cell.id < 180);
+const row10 = cells.filter((cell) => cell.id >= 180 && cell.id < 200);
+const row11 = cells.filter((cell) => cell.id >= 200 && cell.id < 220);
+const row12 = cells.filter((cell) => cell.id >= 220 && cell.id < 240);
+const row13 = cells.filter((cell) => cell.id >= 240 && cell.id < 260);
+const row14 = cells.filter((cell) => cell.id >= 260 && cell.id < 280);
+const row15 = cells.filter((cell) => cell.id >= 280 && cell.id < 300);
+const row16 = cells.filter((cell) => cell.id >= 300 && cell.id < 320);
+const row17 = cells.filter((cell) => cell.id >= 320 && cell.id < 340);
+const row18 = cells.filter((cell) => cell.id >= 360 && cell.id < 380);
+const row19 = cells.filter((cell) => cell.id >= 380 && cell.id < 400);
+// const row20 = cells.filter((cell) => cell.id >= 400 && cell.id < 420);
+//columns
+const column1 = cells.filter((cell) => cell.id % width === 0);
+const column2 = cells.filter((cell) => cell.id % width === 1);
+const column3 = cells.filter((cell) => cell.id % width === 2);
+const column4 = cells.filter((cell) => cell.id % width === 3);
+const column5 = cells.filter((cell) => cell.id % width === 4);
+const column6 = cells.filter((cell) => cell.id % width === 5);
+const column7 = cells.filter((cell) => cell.id % width === 6);
+const column8 = cells.filter((cell) => cell.id % width === 7);
+const column9 = cells.filter((cell) => cell.id % width === 8);
+const column10 = cells.filter((cell) => cell.id % width === 9);
+const column11 = cells.filter((cell) => cell.id % width === 10);
+const column12 = cells.filter((cell) => cell.id % width === 11);
+const column13 = cells.filter((cell) => cell.id % width === 12);
+const column14 = cells.filter((cell) => cell.id % width === 13);
+const column15 = cells.filter((cell) => cell.id % width === 14);
+const column16 = cells.filter((cell) => cell.id % width === 15);
+const column17 = cells.filter((cell) => cell.id % width === 16);
+const column18 = cells.filter((cell) => cell.id % width === 17);
+const column19 = cells.filter((cell) => cell.id % width === 18);
+const column20 = cells.filter((cell) => cell.id % width === 19);
+
 //building the walls
 walls.forEach((wall) => {
   wall.classList.add("wall");
@@ -213,14 +259,70 @@ startButton.addEventListener("click", () => {
   console.log(`${gameIsPlaying}`);
   startButton.style.display = "none";
 });
+//designating junction cells
+//a junction is where a column and a row meets
+//logic -- create an array of all cells that aren't walls
+//for each cell make an array containing the neighbouring cells: -1 +1 -width width
+//delete from the array any cells that are a wall
+//if the cell neighbours array contains a column and a row -- then that cell gets a junction class
+const notBarrier = cells.filter((cell) => {
+  return !cell.classList.contains("wall");
+});
+notBarrier.forEach((wall) => {
+  return wall.classList.add("notBarrier");
+});
+
+for (let cellLoc = 0; cellLoc < cells.length; cellLoc++) {
+  let neighbours = [];
+  let neighbourUp = cells[cellLoc - width];
+  let neighbourDown = cells[cellLoc + width];
+  let neighbourLeft = cells[cellLoc - 1];
+  let neighbourRight = cells[cellLoc + 1];
+  if (neighbourUp !== undefined) {
+    if (!neighbourUp.classList.contains("wall")) {
+      neighbours.push(neighbourUp);
+    }
+  }
+
+  if (neighbourDown !== undefined) {
+    if (!neighbourDown.classList.contains("wall")) {
+      neighbours.push(neighbourDown);
+    }
+  }
+  if (neighbourLeft !== undefined) {
+    if (!neighbourLeft.classList.contains("wall")) {
+      neighbours.push(neighbourLeft);
+    }
+  }
+  if (neighbourRight !== undefined) {
+    if (!neighbourRight.classList.contains("wall")) {
+      neighbours.push(neighbourRight);
+    }
+  }
+
+  if (neighbours.length > 2) {
+    cells[cellLoc].classList.add("junction");
+  }
+}
+cells.forEach((cell) => {
+  if (cell.classList.contains("wall") && cell.classList.contains("junction")) {
+    return cell.classList.remove("junction");
+  }
+});
+
+//create a list of neighbouring cells that aren't walls
+// if (cells[cellLoc - width].classList.contains("wall")) {
+//   console.log("this cell above me is a wall!");
+// }
 
 //locating pacman
-let pacman = 312;
+let pacman = 315;
+let pacManLoc = cells[pacman];
 let ghost1 = 168;
 let ghost2 = 209;
 let ghost3 = 266;
 let ghost4 = 341;
-cells[pacman].classList.add("pacman");
+pacManLoc.classList.add("pacman");
 // locating ghost1
 cells[ghost1].classList.add("ghost1");
 cells[ghost2].classList.add("ghost2");
@@ -530,3 +632,111 @@ function calcHighScore() {
     localStorage.getItem("localHighscore");
   }
 }
+
+//pacman locator
+//pseudo code
+//find pacman location
+
+// create two loops: one counting up from Pacman index to the end of the array, the other counting down to beginning of the array
+function sonar() {
+  console.log("sonar fired");
+  function clearSonar() {
+    cells.forEach((cell) => {
+      if (cell.classList.contains("pacmanClose")) {
+        return cell.classList.remove("pacmanClose");
+      }
+    });
+  }
+  clearSonar();
+  let pacManRowArr = cells.filter((cell) => {
+    if (
+      parseInt(cell.getAttribute("row")) ===
+      parseInt(cells[pacman].getAttribute("row"))
+    ) {
+      return cell;
+    }
+  });
+  let pacmanRowArrPosition = parseInt(cells[pacman].getAttribute("column"));
+
+  let pacManColumnArr = cells.filter((cell) => {
+    if (
+      parseInt(cell.getAttribute("column")) ===
+      parseInt(cells[pacman].getAttribute("column"))
+    ) {
+      return cell;
+    }
+  });
+  let pacmanColumnArrPosition = parseInt(cells[pacman].getAttribute("row"));
+  function rowLeft() {
+    for (let index = pacmanRowArrPosition; index >= 0; index--) {
+      const cell = pacManRowArr[index];
+
+      if (cell.classList.contains("wall")) {
+        console.log("i am a wall");
+        return;
+      }
+      if (cell.classList.contains("junction")) {
+        console.log("i am a junction");
+      }
+      cell.classList.add("pacmanClose");
+    }
+  }
+  function rowRight() {
+    for (
+      let index = pacmanRowArrPosition;
+      index < pacManRowArr.length;
+      index++
+    ) {
+      const cell = pacManRowArr[index];
+
+      if (cell.classList.contains("wall")) {
+        console.log("i am a wall");
+        return;
+      }
+      if (cell.classList.contains("junction")) {
+        console.log("i am a junction");
+      }
+      cell.classList.add("pacmanClose");
+    }
+  }
+  function columnUp() {
+    for (let index = pacmanColumnArrPosition; index >= 0; index--) {
+      const cell = pacManColumnArr[index];
+
+      if (cell.classList.contains("wall")) {
+        console.log("i am a wall");
+        return;
+      }
+      if (cell.classList.contains("junction")) {
+        console.log("i am a junction");
+      }
+      cell.classList.add("pacmanClose");
+    }
+  }
+  function columnDown() {
+    for (
+      let index = pacmanColumnArrPosition;
+      index < pacManColumnArr.length;
+      index++
+    ) {
+      const cell = pacManColumnArr[index];
+
+      if (cell.classList.contains("wall")) {
+        console.log("i am a wall");
+        return;
+      }
+      if (cell.classList.contains("junction")) {
+        console.log("i am a junction");
+      }
+      cell.classList.add("pacmanClose");
+    }
+  }
+  rowLeft();
+  rowRight();
+  columnDown();
+  columnUp();
+}
+// sonar();
+//create an array of cells which are in the same row as Pacman
+//exclude cells that are walls
+//see if any of the ghosts are in those cells
