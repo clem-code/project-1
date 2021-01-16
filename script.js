@@ -316,18 +316,20 @@ cells.forEach((cell) => {
 // }
 
 //locating pacman
-let pacman = 315;
+let pacman = 364;
 let pacManLoc = cells[pacman];
 let ghost1 = 168;
 let ghost2 = 209;
 let ghost3 = 266;
 let ghost4 = 341;
+let submarine = 210;
 pacManLoc.classList.add("pacman");
 // locating ghost1
 cells[ghost1].classList.add("ghost1");
 cells[ghost2].classList.add("ghost2");
 cells[ghost3].classList.add("ghost3");
 cells[ghost4].classList.add("ghost4");
+cells[submarine].classList.add("submarine");
 // adding the jewels
 cells.forEach((cell) => {
   if (
@@ -378,7 +380,7 @@ function movChange(direction) {
   else if (!cells[pacman + direction].classList.contains("wall")) {
     clearInterval(directionOfTravel);
     directionOfTravel = setInterval(() => {
-      console.log("I am now moving");
+      // console.log("I am now moving");
 
       //rotation
       //to come
@@ -639,7 +641,7 @@ function calcHighScore() {
 
 // create two loops: one counting up from Pacman index to the end of the array, the other counting down to beginning of the array
 function sonar() {
-  console.log("sonar fired");
+  // console.log("sonar fired");
   function clearSonar() {
     cells.forEach((cell) => {
       if (cell.classList.contains("pacmanClose")) {
@@ -672,11 +674,11 @@ function sonar() {
       const cell = pacManRowArr[index];
 
       if (cell.classList.contains("wall")) {
-        console.log("i am a wall");
+        // console.log("i am a wall");
         return;
       }
       if (cell.classList.contains("junction")) {
-        console.log("i am a junction");
+        // console.log("i am a junction");
       }
       cell.classList.add("pacmanClose");
     }
@@ -690,11 +692,11 @@ function sonar() {
       const cell = pacManRowArr[index];
 
       if (cell.classList.contains("wall")) {
-        console.log("i am a wall");
+        // console.log("i am a wall");
         return;
       }
       if (cell.classList.contains("junction")) {
-        console.log("i am a junction");
+        // console.log("i am a junction");
       }
       cell.classList.add("pacmanClose");
     }
@@ -704,11 +706,11 @@ function sonar() {
       const cell = pacManColumnArr[index];
 
       if (cell.classList.contains("wall")) {
-        console.log("i am a wall");
+        // console.log("i am a wall");
         return;
       }
       if (cell.classList.contains("junction")) {
-        console.log("i am a junction");
+        // console.log("i am a junction");
       }
       cell.classList.add("pacmanClose");
     }
@@ -722,11 +724,11 @@ function sonar() {
       const cell = pacManColumnArr[index];
 
       if (cell.classList.contains("wall")) {
-        console.log("i am a wall");
+        // console.log("i am a wall");
         return;
       }
       if (cell.classList.contains("junction")) {
-        console.log("i am a junction");
+        // console.log("i am a junction");
       }
       cell.classList.add("pacmanClose");
     }
@@ -736,7 +738,153 @@ function sonar() {
   columnDown();
   columnUp();
 }
-// sonar();
-//create an array of cells which are in the same row as Pacman
-//exclude cells that are walls
-//see if any of the ghosts are in those cells
+setInterval(() => {
+  sonar();
+}, 1000);
+
+//submarine commander
+//pseudo code
+//scans his row to create an array of all the cells -- will not be able to see through walls
+//checks if pacman is in his row or his column
+//if yes asks if pacman is above or below him
+//passes width/-width 1/-1 into his his direction decider
+//saves direction in local variable
+function submarineTravel(direction) {
+  if (!cells[submarine + direction].classList.contains("wall")) {
+    console.log("submarine is moving");
+    cells[submarine].classList.remove("submarine");
+    submarine += direction;
+    cells[submarine].classList.add("submarine");
+  }
+}
+
+function subLocator() {
+  let lastKnownSighting;
+  //submarine columns
+  let submarineColArrPosition = parseInt(cells[submarine].getAttribute("row"));
+  let submarineColumn = parseInt(cells[submarine].getAttribute("column"));
+  let submarineColArr = cells.filter((cell) => {
+    if (
+      parseInt(cell.getAttribute("column")) ===
+      parseInt(cells[submarine].getAttribute("column"))
+    )
+      return cell;
+  });
+  //submarine rows
+  let submarineRowArrPosition = parseInt(
+    cells[submarine].getAttribute("column")
+  );
+  let submarineRow = parseInt(cells[submarine].getAttribute("row"));
+  let submarineRowArr = cells.filter((cell) => {
+    if (
+      parseInt(cell.getAttribute("row")) ===
+      parseInt(cells[submarine].getAttribute("row"))
+    )
+      return cell;
+  });
+  function subRowLeft() {
+    for (let index = submarineRowArrPosition; index >= 0; index--) {
+      const cell = submarineRowArr[index];
+
+      if (cell.classList.contains("wall")) {
+        // console.log("i am a wall");
+        return;
+      }
+      if (
+        cell.classList.contains("pacmanClose") ||
+        cell.classList.contains("pacman")
+      ) {
+        console.log("we found him to the left");
+        console.log(-1);
+        lastKnownSighting = -1;
+      }
+      cell.classList.add("submarineScan");
+    }
+  }
+  function subRowRight() {
+    for (
+      let index = submarineRowArrPosition;
+      index < submarineRowArr.length;
+      index++
+    ) {
+      const cell = submarineRowArr[index];
+
+      if (cell.classList.contains("wall")) {
+        // console.log("i am a wall");
+        return;
+      }
+      if (
+        cell.classList.contains("pacmanClose") ||
+        cell.classList.contains(pacman)
+      ) {
+        console.log("we found him to the right");
+        console.log(1);
+        lastKnownSighting = 1;
+      }
+      cell.classList.add("submarineScan");
+    }
+  }
+  function subColUp() {
+    for (let index = submarineColArrPosition; index >= 0; index--) {
+      const cell = submarineColArr[index];
+
+      if (cell.classList.contains("wall")) {
+        // console.log("i am a wall");
+        return;
+      }
+      if (
+        cell.classList.contains("pacman") ||
+        cell.classList.contains("pacmanClose")
+      ) {
+        console.log("we found him above us");
+        console.log(-width);
+        lastKnownSighting = -width;
+      }
+      cell.classList.add("submarineScan");
+    }
+  }
+  function subColDown() {
+    for (
+      let index = submarineColArrPosition;
+      index < submarineColArr.length;
+      index++
+    ) {
+      const cell = submarineColArr[index];
+
+      if (cell.classList.contains("wall")) {
+        // console.log("i am a wall");
+        return;
+      }
+      if (
+        cell.classList.contains("pacmanClose") ||
+        cell.classList.contains("pacman")
+      ) {
+        console.log("we found him below us");
+        console.log(width);
+        lastKnownSighting = width;
+      }
+      cell.classList.add("submarineScan");
+    }
+  }
+  subColUp();
+  subColDown();
+  subRowLeft();
+  subRowRight();
+  submarineTravel(lastKnownSighting);
+}
+
+function clearSubLocator() {
+  cells.forEach((cell) => {
+    if (cell.classList.contains("submarineScan")) {
+      return cell.classList.remove("submarineScan");
+    }
+  });
+  console.log("all cleared now");
+}
+
+setInterval(() => {
+  clearSubLocator();
+  subLocator();
+}, 1000);
+
+submarineTravel(lastKnownSighting);

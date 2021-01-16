@@ -122,3 +122,16 @@ button {
 .junction {
   /* background-color: hotpink; */
 }
+.pacmanClose {
+  background-color: yellowgreen;
+  filter: brightness(100%);
+}
+.submarine {
+  background-image: url("subred.png");
+  background-size: contain;
+  background-color: black;
+}
+.submarineScan {
+  background-color: burlywood;
+  filter: brightness(100%);
+}
