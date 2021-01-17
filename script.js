@@ -4,8 +4,12 @@ const modalImg = document.getElementById("modID");
 const startButton = document.querySelector("button");
 const width = 20;
 const cells = [];
-const walls = [];
-const manualWall = [
+// const walls = [];
+//types of maps
+//MAP 1
+const map1Wall = [
+  "15",
+  "395",
   "285",
   "294",
   "114",
@@ -118,8 +122,80 @@ const manualWall = [
   "277",
   "276",
   "296",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "16",
+  "17",
+  "18",
+  "19",
+  "39",
+  "59",
+  "79",
+  "99",
+  "119",
+  "139",
+  "159",
+  "199",
+  "219",
+  "239",
+  "259",
+  "279",
+  "299",
+  "319",
+  "339",
+  "359",
+  "379",
+  "399",
+  "398",
+  "397",
+  "396",
+  "394",
+  "393",
+  "392",
+  "391",
+  "390",
+  "389",
+  "388",
+  "387",
+  "386",
+  "385",
+  "384",
+  "383",
+  "382",
+  "381",
+  "380",
+  "360",
+  "340",
+  "320",
+  "300",
+  "280",
+  "260",
+  "240",
+  "220",
+  "200",
+  "180",
+  "140",
+  "120",
+  "100",
+  "80",
+  "60",
+  "40",
+  "20",
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
 ];
-const sanctum = [
+const sanctum1 = [
   "231",
   "149",
   "150",
@@ -161,6 +237,492 @@ const sanctum = [
   "206",
   "205",
 ];
+//MAP 2
+const map2Wall = [
+  "20",
+  "21",
+  "22",
+  "24",
+  "23",
+  "24",
+  "25",
+  "27",
+  "26",
+  "28",
+  "29",
+  "30",
+  "31",
+  "33",
+  "32",
+  "34",
+  "35",
+  "36",
+  "37",
+  "38",
+  "57",
+  "56",
+  "55",
+  "76",
+  "52",
+  "51",
+  "50",
+  "70",
+  "49",
+  "48",
+  "68",
+  "69",
+  "88",
+  "87",
+  "67",
+  "66",
+  "65",
+  "64",
+  "84",
+  "85",
+  "105",
+  "104",
+  "161",
+  "182",
+  "203",
+  "202",
+  "201",
+  "181",
+  "222",
+  "221",
+  "241",
+  "301",
+  "321",
+  "322",
+  "343",
+  "342",
+  "341",
+  "361",
+  "362",
+  "363",
+  "364",
+  "248",
+  "250",
+  "249",
+  "251",
+  "271",
+  "270",
+  "269",
+  "268",
+  "288",
+  "289",
+  "291",
+  "298",
+  "297",
+  "296",
+  "295",
+  "294",
+  "314",
+  "334",
+  "374",
+  "377",
+  "378",
+  "358",
+  "357",
+  "118",
+  "117",
+  "116",
+  "115",
+  "135",
+  "155",
+  "175",
+  "195",
+  "215",
+  "255",
+  "275",
+  "178",
+  "176",
+  "237",
+  "257",
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "17",
+  "17",
+  "16",
+  "18",
+  "19",
+  "39",
+  "59",
+  "79",
+  "99",
+  "119",
+  "139",
+  "159",
+  "179",
+  "199",
+  "219",
+  "239",
+  "259",
+  "279",
+  "299",
+  "319",
+  "339",
+  "359",
+  "379",
+  "399",
+  "380",
+  "381",
+  "382",
+  "383",
+  "384",
+  "385",
+  "386",
+  "387",
+  "388",
+  "389",
+  "390",
+  "391",
+  "392",
+  "393",
+  "394",
+  "395",
+  "396",
+  "397",
+  "398",
+  "280",
+  "260",
+  "300",
+  "320",
+  "340",
+  "360",
+  "40",
+  "60",
+  "80",
+  "100",
+  "120",
+  "140",
+  "180",
+  "160",
+  "200",
+  "220",
+  "240",
+];
+const sanctum2 = [
+  "166",
+  "167",
+  "168",
+  "169",
+  "170",
+  "172",
+  "171",
+  "192",
+  "191",
+  "189",
+  "187",
+  "186",
+  "188",
+  "190",
+  "210",
+  "209",
+  "208",
+  "207",
+  "206",
+  "226",
+  "227",
+  "228",
+  "229",
+  "230",
+  "231",
+  "232",
+  "212",
+  "211",
+];
+//MAP 3
+//OPEN WATER
+const map3Wall = [
+  "22",
+  "23",
+  "43",
+  "42",
+  "188",
+  "189",
+  "190",
+  "210",
+  "209",
+  "208",
+  "355",
+  "375",
+  "376",
+  "356",
+  "322",
+  "323",
+  "303",
+  "76",
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "399",
+  "398",
+  "397",
+  "395",
+  "396",
+  "394",
+  "393",
+  "392",
+  "391",
+  "390",
+  "389",
+  "388",
+  "387",
+  "386",
+  "385",
+  "384",
+  "383",
+  "382",
+  "381",
+  "380",
+];
+const sanctum3 = [
+  "166",
+  "167",
+  "168",
+  "169",
+  "170",
+  "171",
+  "172",
+  "192",
+  "191",
+  "186",
+  "187",
+  "207",
+  "206",
+  "226",
+  "246",
+  "247",
+  "249",
+  "251",
+  "252",
+  "232",
+  "212",
+  "211",
+  "231",
+  "230",
+  "228",
+  "227",
+  "248",
+  "229",
+  "250",
+];
+//MAP 4
+//The Channel
+const map4Wall = [
+  "385",
+  "384",
+  "383",
+  "382",
+  "381",
+  "380",
+  "120",
+  "121",
+  "122",
+  "123",
+  "124",
+  "104",
+  "105",
+  "85",
+  "66",
+  "47",
+  "28",
+  "29",
+  "30",
+  "31",
+  "32",
+  "33",
+  "34",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "14",
+  "84",
+  "65",
+  "46",
+  "27",
+  "8",
+  "9",
+  "11",
+  "12",
+  "13",
+  "10",
+  "7",
+  "5",
+  "3",
+  "1",
+  "0",
+  "20",
+  "40",
+  "60",
+  "80",
+  "100",
+  "101",
+  "102",
+  "103",
+  "83",
+  "81",
+  "82",
+  "61",
+  "41",
+  "21",
+  "2",
+  "4",
+  "6",
+  "26",
+  "25",
+  "24",
+  "22",
+  "23",
+  "42",
+  "62",
+  "63",
+  "64",
+  "45",
+  "44",
+  "43",
+  "299",
+  "298",
+  "297",
+  "296",
+  "316",
+  "315",
+  "314",
+  "334",
+  "333",
+  "332",
+  "352",
+  "351",
+  "350",
+  "349",
+  "369",
+  "388",
+  "368",
+  "387",
+  "389",
+  "390",
+  "391",
+  "392",
+  "393",
+  "395",
+  "394",
+  "396",
+  "398",
+  "399",
+  "397",
+  "379",
+  "359",
+  "339",
+  "319",
+  "317",
+  "318",
+  "338",
+  "337",
+  "336",
+  "335",
+  "355",
+  "354",
+  "353",
+  "370",
+  "371",
+  "372",
+  "373",
+  "374",
+  "375",
+  "356",
+  "357",
+  "358",
+  "378",
+  "377",
+  "376",
+  "279",
+  "386",
+  "302",
+  "303",
+  "323",
+  "284",
+  "186",
+  "77",
+  "76",
+  "96",
+  "97",
+  "236",
+  "235",
+  "234",
+  "255",
+  "140",
+];
+const sanctum4 = [
+  "147",
+  "167",
+  "187",
+  "207",
+  "208",
+  "209",
+  "210",
+  "211",
+  "212",
+  "192",
+  "172",
+  "152",
+  "151",
+  "149",
+  "148",
+  "150",
+  "170",
+  "190",
+  "191",
+  "171",
+  "169",
+  "168",
+  "188",
+  "189",
+];
+//assigning the wall
+let walls = map1Wall;
+let sanctum = sanctum1;
+///
+//capslock reminder
+document.addEventListener("keydown", (event) => {
+  console.log(event.key);
+  if (event.key === "CapsLock") {
+    alert("CAPSLOCK ON: Game is not going to work!");
+  }
+});
+//
 const tempArray = [];
 const scoreSpan = document.getElementById("scoreSpan");
 const lifeSpan = document.getElementById("lifeSpan");
@@ -184,67 +746,10 @@ for (let index = 0; index < width ** 2; index++) {
   cell.innerHTML = index;
   cell.style.width = 100 / width + "%";
   cell.style.height = 100 / width + "%";
-  if (index < width) {
-    walls.push(cell);
-  }
-  if (index % width === 0) {
-    walls.push(cell);
-  }
-  if ((index + 1) % width === 0) {
-    walls.push(cell);
-  }
-  if (index + width > width ** 2) {
-    walls.push(cell);
-  }
 }
-//rows
-const row1 = cells.filter((cell) => cell.id < 20);
-const row2 = cells.filter((cell) => cell.id >= 20 && cell.id < 40);
-const row3 = cells.filter((cell) => cell.id >= 40 && cell.id < 60);
-const row4 = cells.filter((cell) => cell.id >= 60 && cell.id < 80);
-const row5 = cells.filter((cell) => cell.id >= 80 && cell.id < 100);
-const row6 = cells.filter((cell) => cell.id >= 100 && cell.id < 120);
-const row7 = cells.filter((cell) => cell.id >= 120 && cell.id < 140);
-const row8 = cells.filter((cell) => cell.id >= 140 && cell.id < 160);
-const row9 = cells.filter((cell) => cell.id >= 160 && cell.id < 180);
-const row10 = cells.filter((cell) => cell.id >= 180 && cell.id < 200);
-const row11 = cells.filter((cell) => cell.id >= 200 && cell.id < 220);
-const row12 = cells.filter((cell) => cell.id >= 220 && cell.id < 240);
-const row13 = cells.filter((cell) => cell.id >= 240 && cell.id < 260);
-const row14 = cells.filter((cell) => cell.id >= 260 && cell.id < 280);
-const row15 = cells.filter((cell) => cell.id >= 280 && cell.id < 300);
-const row16 = cells.filter((cell) => cell.id >= 300 && cell.id < 320);
-const row17 = cells.filter((cell) => cell.id >= 320 && cell.id < 340);
-const row18 = cells.filter((cell) => cell.id >= 360 && cell.id < 380);
-const row19 = cells.filter((cell) => cell.id >= 380 && cell.id < 400);
-// const row20 = cells.filter((cell) => cell.id >= 400 && cell.id < 420);
-//columns
-const column1 = cells.filter((cell) => cell.id % width === 0);
-const column2 = cells.filter((cell) => cell.id % width === 1);
-const column3 = cells.filter((cell) => cell.id % width === 2);
-const column4 = cells.filter((cell) => cell.id % width === 3);
-const column5 = cells.filter((cell) => cell.id % width === 4);
-const column6 = cells.filter((cell) => cell.id % width === 5);
-const column7 = cells.filter((cell) => cell.id % width === 6);
-const column8 = cells.filter((cell) => cell.id % width === 7);
-const column9 = cells.filter((cell) => cell.id % width === 8);
-const column10 = cells.filter((cell) => cell.id % width === 9);
-const column11 = cells.filter((cell) => cell.id % width === 10);
-const column12 = cells.filter((cell) => cell.id % width === 11);
-const column13 = cells.filter((cell) => cell.id % width === 12);
-const column14 = cells.filter((cell) => cell.id % width === 13);
-const column15 = cells.filter((cell) => cell.id % width === 14);
-const column16 = cells.filter((cell) => cell.id % width === 15);
-const column17 = cells.filter((cell) => cell.id % width === 16);
-const column18 = cells.filter((cell) => cell.id % width === 17);
-const column19 = cells.filter((cell) => cell.id % width === 18);
-const column20 = cells.filter((cell) => cell.id % width === 19);
 
 //building the walls
 walls.forEach((wall) => {
-  wall.classList.add("wall");
-});
-manualWall.forEach((wall) => {
   const idWall = Number(wall);
   document.getElementById(idWall).classList.add("wall");
 });
@@ -300,7 +805,7 @@ for (let cellLoc = 0; cellLoc < cells.length; cellLoc++) {
     }
   }
 
-  if (neighbours.length > 2) {
+  if (neighbours.length === 3) {
     cells[cellLoc].classList.add("junction");
   }
 }
@@ -310,26 +815,21 @@ cells.forEach((cell) => {
   }
 });
 
-//create a list of neighbouring cells that aren't walls
-// if (cells[cellLoc - width].classList.contains("wall")) {
-//   console.log("this cell above me is a wall!");
-// }
+//mapBuilder
+// grid.addEventListener("click", (event) => {
+//   console.log(parseInt(event.target.id));
+//   tempArray.push(event.target.id);
+//   event.target.classList.add("sanctum");
+//   console.log(tempArray);
+// });
 
 //locating pacman
-let pacman = 364;
-let pacManLoc = cells[pacman];
-let ghost1 = 168;
-let ghost2 = 209;
-let ghost3 = 266;
-let ghost4 = 341;
-let submarine = 210;
-pacManLoc.classList.add("pacman");
-// locating ghost1
-cells[ghost1].classList.add("ghost1");
-cells[ghost2].classList.add("ghost2");
-cells[ghost3].classList.add("ghost3");
-cells[ghost4].classList.add("ghost4");
+let pacman = 338;
+cells[pacman].classList.add("pacman");
+let submarine = parseInt(sanctum[20]);
+let submarine2 = parseInt(sanctum[10]);
 cells[submarine].classList.add("submarine");
+cells[submarine2].classList.add("submarine2");
 // adding the jewels
 cells.forEach((cell) => {
   if (
@@ -344,8 +844,8 @@ cells.forEach((cell) => {
 let directionOfTravel;
 let directionOfTravelGhost1;
 let directionOfTravelGhost2;
-let directionOfTravelGhost3;
-let directionOfTravelGhost4;
+// let directionOfTravelGhost3;
+// let directionOfTravelGhost4;
 let keyControl;
 const leftMov = -1;
 const rightMov = 1;
@@ -380,10 +880,6 @@ function movChange(direction) {
   else if (!cells[pacman + direction].classList.contains("wall")) {
     clearInterval(directionOfTravel);
     directionOfTravel = setInterval(() => {
-      // console.log("I am now moving");
-
-      //rotation
-      //to come
       //clears if hits an obstacle
       if (cells[pacman + direction].classList.contains("wall")) {
         clearInterval(directionOfTravel);
@@ -392,254 +888,19 @@ function movChange(direction) {
       }
       //continues if the way is clear
       if (!cells[pacman + direction].classList.contains("wall")) {
-        console.log("the way is clear");
+        // console.log("the way is clear");
         cells[pacman].classList.remove("pacman");
         if (cells[pacman + direction].classList.contains("jewel")) {
           cells[pacman + direction].classList.remove("jewel");
           curScore++;
           scoreSpan.textContent = curScore;
         }
-        const contactCheck = setInterval(() => {
-          if (
-            cells[pacman + direction].classList.contains("ghost1") ||
-            cells[pacman + direction].classList.contains("ghost2") ||
-            cells[pacman + direction].classList.contains("ghost3") ||
-            cells[pacman + direction].classList.contains("ghost4")
-          ) {
-            cells[pacman + direction].classList.remove("pacman");
-            cells[pacman].classList.remove("pacman");
-            clearInterval(directionOfTravel);
-            pacman = 314;
-            currentLives--;
-            lifeSpan.textContent = currentLives;
-            clearInterval(contactCheck);
-            if (currentLives === 0) {
-              putinModal();
-            } else {
-              deathModal();
-            }
-            return;
-          }
-        }, 100);
-
         pacman += direction;
         cells[pacman].classList.add("pacman");
       }
     }, 300);
   }
 }
-
-//ghost movements -- random
-const randomMovement = function () {
-  let randomNum = Math.floor(Math.random() * 4);
-  let randomMov = movArray[randomNum];
-  return randomMov;
-};
-//ghost1
-let ghostOneIsMoving = false;
-
-function ghost1Mov(direction) {
-  ghostOneIsMoving = true;
-  // console.log(`${ghostOneIsMoving}`);
-  if (cells[ghost1 + direction].classList.contains("wall")) {
-    // console.log("the fail safe has been triggered");
-    ghost1Mov(randomMovement());
-    // console.log(`${ghostOneIsMoving}`);
-    return;
-  }
-  //if it is, trigger set interval
-  else if (!cells[ghost1 + direction].classList.contains("wall")) {
-    clearInterval(directionOfTravelGhost1);
-    directionOfTravelGhost1 = setInterval(() => {
-      // console.log("I am now moving");
-
-      //rotation
-      //to come
-      //clears if hits an obstacle
-      if (cells[ghost1 + direction].classList.contains("wall")) {
-        clearInterval(directionOfTravelGhost1);
-        // console.log("interval cleared");
-        // ghostOneIsMoving = false;
-        ghost1Mov(randomMovement());
-        // console.log(`${ghostOneIsMoving}`);
-        keyControl = 0;
-      }
-      //continues if the way is clear
-      if (!cells[ghost1 + direction].classList.contains("wall")) {
-        // console.log("ghost says the way is clear");
-        cells[ghost1].classList.remove("ghost1");
-        ghost1 += direction;
-        cells[ghost1].classList.add("ghost1");
-      }
-    }, 400);
-  }
-}
-while (ghostOneIsMoving === false) {
-  ghost1Mov(randomMovement());
-}
-//ghost will receive a random direction
-//it will generate a set interval and go in that direction until it hits a wall
-//when it hits a wall it will cancel the set interval
-//and generate a new set interval with a new direction
-
-//ghost 2
-let ghostTwoIsMoving = false;
-
-function ghost2Mov(direction) {
-  ghostTwoIsMoving = true;
-  // console.log(`${ghostTwoIsMoving}`);
-  if (cells[ghost2 + direction].classList.contains("wall")) {
-    // console.log("the fail safe has been triggered");
-    ghost2Mov(randomMovement());
-    // console.log(`${ghostTwoIsMoving}`);
-    return;
-  }
-  //if it is, trigger set interval
-  else if (!cells[ghost2 + direction].classList.contains("wall")) {
-    clearInterval(directionOfTravelGhost2);
-    directionOfTravelGhost2 = setInterval(() => {
-      // console.log("Ghost 2 is now moving");
-
-      //rotation
-      //to come
-      //clears if hits an obstacle
-      if (cells[ghost2 + direction].classList.contains("wall")) {
-        clearInterval(directionOfTravelGhost2);
-        // console.log("interval cleared");
-        // ghostOneIsMoving = false;
-        ghost2Mov(randomMovement());
-        // console.log(`${ghostTwoIsMoving}`);
-        keyControl = 0;
-      }
-      //continues if the way is clear
-      if (!cells[ghost2 + direction].classList.contains("wall")) {
-        // console.log("ghost 2 says the way is clear");
-        cells[ghost2].classList.remove("ghost2");
-
-        ghost2 += direction;
-        cells[ghost2].classList.add("ghost2");
-      }
-    }, 400);
-  }
-}
-while (ghostTwoIsMoving === false) {
-  ghost2Mov(randomMovement());
-}
-//ghost 3
-let ghostThreeIsMoving = false;
-
-function ghost3Mov(direction) {
-  ghostThreeIsMoving = true;
-  // console.log(`${ghostThreeIsMoving}`);
-  if (cells[ghost3 + direction].classList.contains("wall")) {
-    // console.log("the fail safe has been triggered");
-    ghost3Mov(randomMovement());
-    // console.log(`${ghostThreeIsMoving}`);
-    return;
-  }
-  //if it is, trigger set interval
-  else if (!cells[ghost3 + direction].classList.contains("wall")) {
-    clearInterval(directionOfTravelGhost3);
-    directionOfTravelGhost3 = setInterval(() => {
-      // console.log("Ghost 3 is now moving");
-
-      //rotation
-      //to come
-      //clears if hits an obstacle
-      if (cells[ghost3 + direction].classList.contains("wall")) {
-        clearInterval(directionOfTravelGhost3);
-        // console.log("interval cleared");
-        // ghostOneIsMoving = false;
-        ghost3Mov(randomMovement());
-        // console.log(`${ghostThreeIsMoving}`);
-        keyControl = 0;
-      }
-      //continues if the way is clear
-      if (!cells[ghost3 + direction].classList.contains("wall")) {
-        // console.log("ghost 3 says the way is clear");
-        cells[ghost3].classList.remove("ghost3");
-
-        ghost3 += direction;
-        cells[ghost3].classList.add("ghost3");
-      }
-    }, 400);
-  }
-}
-while (ghostThreeIsMoving === false) {
-  ghost3Mov(randomMovement());
-}
-
-//ghost 4
-let ghostFourIsMoving = false;
-
-function ghost4Mov(direction) {
-  ghostFourIsMoving = true;
-  // console.log(`${ghostFourIsMoving}`);
-  if (cells[ghost4 + direction].classList.contains("wall")) {
-    // console.log("the fail safe has been triggered");
-    ghost4Mov(randomMovement());
-    // console.log(`${ghostFourIsMoving}`);
-    return;
-  }
-  //if it is, trigger set interval
-  else if (!cells[ghost4 + direction].classList.contains("wall")) {
-    clearInterval(directionOfTravelGhost4);
-    directionOfTravelGhost4 = setInterval(() => {
-      // console.log("Ghost 4 is now moving");
-
-      //rotation
-      //to come
-      //clears if hits an obstacle
-      if (cells[ghost4 + direction].classList.contains("wall")) {
-        clearInterval(directionOfTravelGhost4);
-        // console.log("interval cleared");
-        // ghostOneIsMoving = false;
-        ghost4Mov(randomMovement());
-        // console.log(`${ghostFourIsMoving}`);
-        keyControl = 0;
-      }
-      //continues if the way is clear
-      if (!cells[ghost4 + direction].classList.contains("wall")) {
-        // console.log("ghost 4 says the way is clear");
-        cells[ghost4].classList.remove("ghost4");
-
-        ghost4 += direction;
-        cells[ghost4].classList.add("ghost4");
-      }
-    }, 400);
-  }
-}
-while (ghostFourIsMoving === false) {
-  ghost4Mov(randomMovement());
-}
-function deathModal() {
-  modal.innerHTML = `💀 YOU LOST A LIFE 💀 `;
-  modal.style.display = "block";
-  setTimeout(() => {
-    modal.style.display = "none";
-    modal.innerHTML = "";
-  }, 700);
-}
-function putinModal() {
-  modal.style.display = "block";
-  modal.innerHTML = `💀🏴‍☠️GAME☠️☠️OVER🏴‍☠️💀`;
-  setTimeout(() => {
-    modal.style.display = "none";
-    modal.innerHTML = "";
-  }, 700);
-}
-function calcHighScore() {
-  if (curScore > highscore) {
-    window.localStorage.setItem("localHighscore", curScore);
-    localStorage.getItem("localHighscore");
-  }
-}
-
-//pacman locator
-//pseudo code
-//find pacman location
-
-// create two loops: one counting up from Pacman index to the end of the array, the other counting down to beginning of the array
 function sonar() {
   // console.log("sonar fired");
   function clearSonar() {
@@ -658,6 +919,7 @@ function sonar() {
       return cell;
     }
   });
+  //variables to find column and row
   let pacmanRowArrPosition = parseInt(cells[pacman].getAttribute("column"));
 
   let pacManColumnArr = cells.filter((cell) => {
@@ -740,151 +1002,233 @@ function sonar() {
 }
 setInterval(() => {
   sonar();
-}, 1000);
-
-//submarine commander
+}, 500);
+//submarine movement
 //pseudo code
-//scans his row to create an array of all the cells -- will not be able to see through walls
-//checks if pacman is in his row or his column
-//if yes asks if pacman is above or below him
-//passes width/-width 1/-1 into his his direction decider
-//saves direction in local variable
-function submarineTravel(direction) {
-  if (!cells[submarine + direction].classList.contains("wall")) {
-    console.log("submarine is moving");
+function findPacMan() {
+  //is a pacman trace in my column?
+  //check all cells with same column id
+  let colTraces;
+  //is pacman in my column?
+  if (
+    parseInt(cells[pacman].getAttribute("column")) ===
+    parseInt(cells[submarine].getAttribute("column"))
+  ) {
+    console.log("we are in the same column");
+    if (
+      parseInt(cells[pacman].getAttribute("row")) >
+      parseInt(cells[submarine].getAttribute("row"))
+    ) {
+      console.log("pacman is below me");
+      return width;
+    } else {
+      console.log("pacman is above me");
+      return -width;
+    }
+  }
+  // is pacman in my row?
+  else if (
+    parseInt(cells[pacman].getAttribute("row")) ===
+    parseInt(cells[submarine].getAttribute("row"))
+  ) {
+    console.log("we are in the same row");
+    if (
+      parseInt(cells[pacman].getAttribute("column")) >
+      parseInt(cells[submarine].getAttribute("column"))
+    ) {
+      console.log("pacman is to my right");
+      return 1;
+    } else {
+      console.log("pacman is to my left");
+      return -1;
+    }
+  }
+  const checkCol = cells.some((cell) => {
+    if (
+      cell.getAttribute("column") === cells[submarine].getAttribute("column") &&
+      cell.classList.contains("pacmanClose")
+    ) {
+      console.log("this is working", cell, cell.id);
+      colTraces = parseInt(cell.getAttribute("row"));
+      console.log("this is coltraces", colTraces);
+      return cell;
+    }
+  });
+  console.log("this is checkCol", checkCol);
+  if (checkCol) {
+    console.log("we have found a trace");
+    if (colTraces > parseInt(cells[submarine].getAttribute("row"))) {
+      console.log("pacman is below me");
+      return width;
+    } else {
+      console.log("pacman is above me");
+      return -width;
+    }
+  }
+  if (
+    parseInt(cells[pacman].getAttribute("row")) !==
+      parseInt(cells[submarine].getAttribute("row")) &&
+    parseInt(cells[pacman].getAttribute("column")) !==
+      parseInt(cells[submarine].getAttribute("column"))
+  ) {
+    return movArray[Math.floor(Math.random() * 4)];
+  }
+}
+// let newDirection = findPacMan();
+function directionCheck(direction) {
+  // console.log("this is the direction", direction);
+  let movDirection = direction;
+  let proposedCell = parseInt(cells[submarine].id) + movDirection;
+  if (cells[proposedCell].classList.contains("wall")) {
+    let potCell = parseInt(cells[submarine].id);
+    const option1 = -1;
+    const option2 = 1;
+    const option3 = -width;
+    const option4 = width;
+    const options = [option1, option2, option3, option4];
+    const filteredOptions = options.filter((option) => {
+      if (!cells[potCell + option].classList.contains("wall")) {
+        return option;
+      }
+    });
+    movDirection = parseInt(
+      filteredOptions[Math.floor(Math.random() * filteredOptions.length)]
+    );
+  } else if (!cells[proposedCell].classList.contains("wall"));
+  {
+    // console.log("this is not a wall");
+    //moves into this cell
     cells[submarine].classList.remove("submarine");
-    submarine += direction;
+    // console.log("submarine is now here", submarine, typeof submarine);
+    submarine += movDirection;
+    // console.log("submarine is now here", submarine);
     cells[submarine].classList.add("submarine");
   }
+  // if (!proposedCell.classList.contains("wall")) {
+  //   console.log("this is a wall");
+  // } else {
+  //   console.log("this is not a wall");
 }
-
-function subLocator() {
-  let lastKnownSighting;
-  //submarine columns
-  let submarineColArrPosition = parseInt(cells[submarine].getAttribute("row"));
-  let submarineColumn = parseInt(cells[submarine].getAttribute("column"));
-  let submarineColArr = cells.filter((cell) => {
-    if (
-      parseInt(cell.getAttribute("column")) ===
-      parseInt(cells[submarine].getAttribute("column"))
-    )
-      return cell;
-  });
-  //submarine rows
-  let submarineRowArrPosition = parseInt(
-    cells[submarine].getAttribute("column")
-  );
-  let submarineRow = parseInt(cells[submarine].getAttribute("row"));
-  let submarineRowArr = cells.filter((cell) => {
-    if (
-      parseInt(cell.getAttribute("row")) ===
-      parseInt(cells[submarine].getAttribute("row"))
-    )
-      return cell;
-  });
-  function subRowLeft() {
-    for (let index = submarineRowArrPosition; index >= 0; index--) {
-      const cell = submarineRowArr[index];
-
-      if (cell.classList.contains("wall")) {
-        // console.log("i am a wall");
-        return;
-      }
-      if (
-        cell.classList.contains("pacmanClose") ||
-        cell.classList.contains("pacman")
-      ) {
-        console.log("we found him to the left");
-        console.log(-1);
-        lastKnownSighting = -1;
-      }
-      cell.classList.add("submarineScan");
-    }
-  }
-  function subRowRight() {
-    for (
-      let index = submarineRowArrPosition;
-      index < submarineRowArr.length;
-      index++
-    ) {
-      const cell = submarineRowArr[index];
-
-      if (cell.classList.contains("wall")) {
-        // console.log("i am a wall");
-        return;
-      }
-      if (
-        cell.classList.contains("pacmanClose") ||
-        cell.classList.contains(pacman)
-      ) {
-        console.log("we found him to the right");
-        console.log(1);
-        lastKnownSighting = 1;
-      }
-      cell.classList.add("submarineScan");
-    }
-  }
-  function subColUp() {
-    for (let index = submarineColArrPosition; index >= 0; index--) {
-      const cell = submarineColArr[index];
-
-      if (cell.classList.contains("wall")) {
-        // console.log("i am a wall");
-        return;
-      }
-      if (
-        cell.classList.contains("pacman") ||
-        cell.classList.contains("pacmanClose")
-      ) {
-        console.log("we found him above us");
-        console.log(-width);
-        lastKnownSighting = -width;
-      }
-      cell.classList.add("submarineScan");
-    }
-  }
-  function subColDown() {
-    for (
-      let index = submarineColArrPosition;
-      index < submarineColArr.length;
-      index++
-    ) {
-      const cell = submarineColArr[index];
-
-      if (cell.classList.contains("wall")) {
-        // console.log("i am a wall");
-        return;
-      }
-      if (
-        cell.classList.contains("pacmanClose") ||
-        cell.classList.contains("pacman")
-      ) {
-        console.log("we found him below us");
-        console.log(width);
-        lastKnownSighting = width;
-      }
-      cell.classList.add("submarineScan");
-    }
-  }
-  subColUp();
-  subColDown();
-  subRowLeft();
-  subRowRight();
-  submarineTravel(lastKnownSighting);
-}
-
-function clearSubLocator() {
-  cells.forEach((cell) => {
-    if (cell.classList.contains("submarineScan")) {
-      return cell.classList.remove("submarineScan");
-    }
-  });
-  console.log("all cleared now");
-}
-
+// if (cells[submarine + direction].classList.contains("wall")) {
+//   console.log("this cell is not a wall");
+// }
 setInterval(() => {
-  clearSubLocator();
-  subLocator();
+  let newDirection = findPacMan();
+  directionCheck(newDirection);
 }, 1000);
 
-submarineTravel(lastKnownSighting);
+//SUBMARINE 2 MOVEMENT
+function findPacMan2() {
+  //is a pacman trace in my column?
+  //check all cells with same column id
+  let rowTraces;
+  //is pacman in my column?
+  if (
+    parseInt(cells[pacman].getAttribute("column")) ===
+    parseInt(cells[submarine2].getAttribute("column"))
+  ) {
+    console.log("we are in the same column");
+    if (
+      parseInt(cells[pacman].getAttribute("row")) >
+      parseInt(cells[submarine2].getAttribute("row"))
+    ) {
+      console.log("pacman is below me");
+      return width;
+    } else {
+      console.log("pacman is above me");
+      return -width;
+    }
+  }
+  // is pacman in my row?
+  else if (
+    parseInt(cells[pacman].getAttribute("row")) ===
+    parseInt(cells[submarine2].getAttribute("row"))
+  ) {
+    console.log("we are in the same row");
+    if (
+      parseInt(cells[pacman].getAttribute("column")) >
+      parseInt(cells[submarine2].getAttribute("column"))
+    ) {
+      console.log("pacman is to my right");
+      return 1;
+    } else {
+      console.log("pacman is to my left");
+      return -1;
+    }
+  }
+  const checkRow = cells.some((cell) => {
+    if (
+      cell.getAttribute("row") === cells[submarine2].getAttribute("row") &&
+      cell.classList.contains("pacmanClose")
+    ) {
+      console.log("this is working", cell, cell.id);
+      rowTraces = parseInt(cell.getAttribute("column"));
+      console.log("this is rowtraces", rowTraces);
+      return cell;
+    }
+  });
+  console.log("this is checkRow", checkRow);
+  if (checkRow) {
+    console.log("we have found a trace");
+    if (rowTraces > parseInt(cells[submarine2].getAttribute("column"))) {
+      console.log("pacman is to my right");
+      return 1;
+    } else {
+      console.log("pacman is to my left");
+      return -1;
+    }
+  }
+  if (
+    parseInt(cells[pacman].getAttribute("row")) !==
+      parseInt(cells[submarine2].getAttribute("row")) &&
+    parseInt(cells[pacman].getAttribute("column")) !==
+      parseInt(cells[submarine2].getAttribute("column"))
+  ) {
+    return movArray[Math.floor(Math.random() * 4)];
+  }
+}
+// let newDirection = findPacMan();
+function directionCheck2(direction) {
+  // console.log("this is the direction", direction);
+  let movDirection = direction;
+  let proposedCell = parseInt(cells[submarine2].id) + movDirection;
+  if (cells[proposedCell].classList.contains("wall")) {
+    // console.log("this is a wall");
+    let potCell = parseInt(cells[submarine2].id);
+    const option1 = -1;
+    const option2 = 1;
+    const option3 = -width;
+    const option4 = width;
+    const options = [option1, option2, option3, option4];
+    const filteredOptions = options.filter((option) => {
+      if (!cells[potCell + option].classList.contains("wall")) {
+        return option;
+      }
+    });
+    movDirection = parseInt(
+      filteredOptions[Math.floor(Math.random() * filteredOptions.length)]
+    );
+    // movDirection = 0;
+    //don't let it move
+  } else if (!cells[proposedCell].classList.contains("wall"));
+  {
+    // console.log("this is not a wall");
+    //moves into this cell
+    cells[submarine2].classList.remove("submarine2");
+    // console.log("submarine is now here", submarine, typeof submarine);
+    submarine2 += movDirection;
+    // console.log("submarine is now here", submarine);
+    cells[submarine2].classList.add("submarine2");
+  }
+  // if (!proposedCell.classList.contains("wall")) {
+  //   console.log("this is a wall");
+  // } else {
+  //   console.log("this is not a wall");
+}
+// if (cells[submarine + direction].classList.contains("wall")) {
+//   console.log("this cell is not a wall");
+// }
+setInterval(() => {
+  let newDirection = findPacMan2();
+  directionCheck2(newDirection);
+}, 1000);

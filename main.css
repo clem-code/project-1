@@ -75,11 +75,11 @@ button {
 .cell {
   /* border: 1px solid violet; */
   font-size: 10px;
-  background-color: black;
+  background-color: darkblue;
   border-radius: 10px;
 }
 .wall {
-  background-color: blueviolet;
+  background-color: sandybrown;
   color: white;
   /* border-radius: 10px; */
 }
@@ -91,7 +91,7 @@ button {
 }
 
 .sanctum {
-  background-color: darkblue;
+  /* background-color: beige; */
 }
 .jewel {
   background-image: url("jewel.png");
@@ -100,16 +100,16 @@ button {
   background-position: center;
 }
 .ghost1 {
-  background-image: url("ghost1.png");
+  background-image: url("submarine3.png");
   background-size: contain;
   background-color: black;
 }
 .ghost2 {
-  background-image: url("ghost2.png");
+  background-image: url("submarine4.png");
   background-size: contain;
   background-color: black;
 }
-.ghost3 {
+/* .ghost3 {
   background-image: url("ghost3.png");
   background-size: contain;
   background-color: black;
@@ -118,20 +118,35 @@ button {
   background-image: url("ghost4.png");
   background-size: contain;
   background-color: black;
-}
+} */
 .junction {
   /* background-color: hotpink; */
 }
 .pacmanClose {
-  background-color: yellowgreen;
+  background-color: rgba(211, 240, 183, 0.4);
   filter: brightness(100%);
+}
+
+.submarineScan {
+  /* background-color: hotpink; */
+  /* background-image: url("sonar.gif");
+  transform: rotate(90deg); */
+}
+
+.submarine2Scan {
+  /* background-color: gold;
+  filter: brightness(100%); */
+  /* background-image: url("sonar.gif");
+  transform: rotate(90deg); */
 }
 .submarine {
   background-image: url("subred.png");
   background-size: contain;
-  background-color: black;
+  transform: rotate(0deg);
+  /* background-color: black; */
 }
-.submarineScan {
-  background-color: burlywood;
-  filter: brightness(100%);
+.submarine2 {
+  background-image: url("subgreen.png");
+  background-size: contain;
+  /* background-color: black; */
 }
