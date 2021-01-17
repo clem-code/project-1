@@ -712,7 +712,7 @@ const sanctum4 = [
   "189",
 ];
 //assigning the wall
-let walls = map1Wall;
+let walls = map3Wall;
 let sanctum = sanctum1;
 ///
 //capslock reminder
@@ -1002,7 +1002,7 @@ function sonar() {
 }
 setInterval(() => {
   sonar();
-}, 500);
+}, 1000);
 //submarine movement
 //pseudo code
 function findPacMan() {

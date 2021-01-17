@@ -90,8 +90,20 @@ button {
   transform: rotate(0deg);
 }
 
-.sanctum {
+/* .sanctum {
   /* background-color: beige; */
+/* } */
+.sanctum {
+  animation: pulse 3s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: dodgerblue;
+  }
+  100% {
+    background-color: darkblue;
+  }
 }
 .jewel {
   background-image: url("jewel.png");
