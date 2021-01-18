@@ -506,8 +506,8 @@ function detectDeath() {
     if (
       cells[pacman].classList.contains("submarine") ||
       cells[pacman].classList.contains("submarine2") ||
-      cells[pacman].classList.contains("ghost1") ||
-      cells[pacman].classList.contains("ghost2")
+      // cells[pacman].classList.contains("ghost1") ||
+      // cells[pacman].classList.contains("ghost2")
     ) {
       console.log("pacman is dead");
       cells.forEach((cell) => {
@@ -524,3 +524,6 @@ function detectDeath() {
   }, 300);
 }
 detectDeath();
+
+
+

@@ -12,20 +12,48 @@
     />
   </head>
   <body>
-    <div class="gameBoards">
-      <div class="scoreboard"><button>PLAY</button></div>
-      <div class="scoreboard">
-        <div class="score">Your score is: <span id="scoreSpan">0</span>!</div>
-        <div class="score">No. of lives: <span id="lifeSpan">0</span></div>
-        <div class="score">
-          The all-time highscore is: <span id="highScore">0</span>
-        </div>
+    <div class="hero">
+      <h1>HUNT FOR THE RED OCTOBER</h1>
+      <div class="infobox">
+        <h2>MISSION</h2>
+        <ul>
+          <li>Evade Enemy Submarines</li>
+          <li>Collect Sunken Treasure</li>
+          <li>Drink Vodka</li>
+        </ul>
+      </div>
+      <div class="infobox">
+        <h2>RULES</h2>
+        <ul>
+          <li>Collect All Treasure To Win</li>
+          <li>Drink Vodka To Gain Extra Lives</li>
+          <li>Keep An Eye On The Time</li>
+        </ul>
+      </div>
+      <div class="infobox">
+        <h2>MAPS</h2>
+        <a href="#grid"><button class="mapChoice">CLASSIC</button></a>
+        <a href="#grid"><button class="mapChoice">CAVERNS</button></a>
+        <a href="#grid"><button class="mapChoice">OPEN WATER</button></a>
+        <a href="#grid"><button class="mapChoice">THE CHANNEL</button></a>
+        <a href="#grid"><button class="mapChoice">LABYRINTH</button></a>
       </div>
     </div>
-    <div class="grid"></div>
-    <div class="modal">
-      <img id="modID" src="putinlaugh.JPG" />
-      A MESSAGE HERE
+    <div class="container">
+      <div class="gameBoards">
+        <div class="scoreboard"><button id="start">PLAY</button></div>
+        <div class="scoreboard">
+          <div class="score">Your score is: <span id="scoreSpan">0</span>!</div>
+          <div class="score">No. of lives: <span id="lifeSpan">0</span></div>
+          <div class="score">
+            The all-time highscore is: <span id="highScore">0</span>
+          </div>
+        </div>
+      </div>
+      <div class="gameBoards">
+        <div class="scoreboard" id="notifications">ON ACTIVE PATROL</div>
+      </div>
+      <div class="grid" id="grid"></div>
     </div>
     <script src="script.js"></script>
   </body>

@@ -3,12 +3,72 @@
 }
 
 body {
-  height: 100vh;
+  height: 140vh;
+  display: flex;
+  background-color: black;
+  /* justify-content: space-around;
+  align-items: center; */
+  flex-direction: column;
+  margin: 0;
+}
+.hero {
+  padding: 120px;
+  height: 5000px;
+  width: 100%;
+  background-color: black;
+  border: solid black 3px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+h1 {
+  font-family: VT323;
+  font-size: 140px;
+  color: #e25822;
+  text-align: center;
+  margin: auto 5;
+}
+h2 {
+  color: #e25822;
+  text-align: center;
+}
+a {
+  color: inherit;
+  text-decoration: inherit;
+  width: 100%;
+  text-align: center;
+}
+button {
+  width: 75%;
+  text-align: center;
+  font-weight: bold;
+  font-family: VT323;
+  font-size: 25px;
+  border: solid 5px #e25822;
+  background-color: black;
+  padding: 2px;
+  margin: 3px;
+  color: white;
+}
+.infobox {
+  height: 400px;
+  width: 400px;
+  background-color: black;
+  border: dotted 2px #e25822;
+  color: #e25822;
+  font-family: VT323;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.container {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
-  margin: 0;
 }
 .gameboard {
   display: flex;
@@ -26,14 +86,7 @@ body {
   justify-content: space-around;
   align-items: center;
 }
-button {
-  width: 50%;
-  text-align: center;
-  font-weight: bold;
-  font-family: VT323;
-  font-size: 40px;
-  border: solid 10px #e25822;
-}
+
 .score {
   color: hotpink;
   font-size: 40px;
@@ -54,19 +107,16 @@ button {
   width: 800px;
   background-color: black;
   border-radius: 10px;
+  margin: 100px 0 100px 0;
 }
-.modal {
-  z-index: 1;
+.signboard {
   height: 100px;
   width: 700px;
-  display: none;
   background-color: hotpink;
   border: ridge 3px black;
-  position: fixed;
-  margin: 0 auto;
   text-align: center;
   font-family: VT323;
-  font-size: 70px;
+  font-size: 50px;
   color: black;
 }
 #modID {
@@ -84,9 +134,9 @@ button {
   /* border-radius: 10px; */
 }
 .pacman {
-  background-image: url("pacman.gif");
+  background-image: url("red_submarine.png");
   background-size: contain;
-  background-color: black;
+  /* background-color: black; */
   transform: rotate(0deg);
 }
 
@@ -96,10 +146,24 @@ button {
 .sanctum {
   animation: pulse 3s infinite;
 }
+#notifications {
+  animation: pulse1 3s infinite;
+  font-family: VT323;
+  font-size: 30px;
+}
+@keyframes pulse1 {
+  0%,
+  100% {
+    background-color: crimson;
+  }
+  50% {
+    background-color: #e25822;
+  }
+}
 
 @keyframes pulse {
   0% {
-    background-color: dodgerblue;
+    background-color: mediumblue;
   }
   100% {
     background-color: darkblue;
@@ -111,15 +175,15 @@ button {
   background-size: 50%, 50%;
   background-position: center;
 }
-.ghost1 {
+.submarine3 {
   background-image: url("submarine3.png");
   background-size: contain;
-  background-color: black;
+  /* background-color: black; */
 }
 .ghost2 {
   background-image: url("submarine4.png");
   background-size: contain;
-  background-color: black;
+  /* background-color: black; */
 }
 /* .ghost3 {
   background-image: url("ghost3.png");
@@ -135,10 +199,19 @@ button {
   /* background-color: hotpink; */
 }
 .pacmanClose {
-  background-color: rgba(211, 240, 183, 0.4);
+  background-color: rgba(230, 183, 240, 0.8);
   filter: brightness(100%);
+  animation: pulse 3s infinite;
 }
 
+@keyframes pulse {
+  0% {
+    background-color: midnightblue;
+  }
+  100% {
+    background-color: darkblue;
+  }
+}
 .submarineScan {
   /* background-color: hotpink; */
   /* background-image: url("sonar.gif");
@@ -161,4 +234,8 @@ button {
   background-image: url("subgreen.png");
   background-size: contain;
   /* background-color: black; */
+}
+.alcohol {
+  background-image: url("alcohol.png");
+  background-size: contain;
 }
