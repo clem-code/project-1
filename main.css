@@ -12,23 +12,27 @@ body {
   margin: 0;
 }
 .hero {
-  padding: 120px;
+  padding: 20px;
   height: 5000px;
   width: 100%;
   background-color: black;
   border: solid black 3px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+}
+img {
+  background: radial-gradient(#e25822, black 70%);
+  width: 100px;
 }
 h1 {
   font-family: VT323;
   font-size: 140px;
   color: #e25822;
   text-align: center;
-  margin: auto 5;
+  margin: auto 3;
 }
 h2 {
   color: #e25822;
@@ -137,12 +141,19 @@ button {
   background-image: url("red_submarine.png");
   background-size: contain;
   /* background-color: black; */
-  transform: rotate(0deg);
+  /* default face right*/
+  /* transform: rotateY(0deg); */
+  /* makes face towards left */
+  /* transform: rotateY(3.142rad); */
+  /* makes face up */
+  /* transform: rotateZ(-0.25turn); */
+  /* makes face down */
+  /* transform: rotateZ(90deg); */
 }
 
-/* .sanctum {
-  /* background-color: beige; */
-/* } */
+.sanctum5 {
+  background-color: hotpink;
+}
 .sanctum {
   animation: pulse 3s infinite;
 }

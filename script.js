@@ -1,5 +1,5 @@
 const grid = document.querySelector(".grid");
-// const modal = document.querySelector(".modal");
+const notifications = document.getElementById("notifications");
 // const modalImg = document.getElementById("modID");
 const startButton = document.getElementById("start");
 const width = 20;
@@ -651,8 +651,170 @@ const map4Wall = [
   "255",
   "140",
 ];
+//MAP 5
+//LABYRINTH
+const map5Wall = [
+  "0",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "10",
+  "11",
+  "12",
+  "13",
+  "14",
+  "15",
+  "16",
+  "17",
+  "18",
+  "19",
+  "39",
+  "59",
+  "79",
+
+  "139",
+  "159",
+  "179",
+  "119",
+  "219",
+  "239",
+  "259",
+  "279",
+  "299",
+  "339",
+  "359",
+  "379",
+  "399",
+  "398",
+  "397",
+  "396",
+  "395",
+  "394",
+  "393",
+  "392",
+  "391",
+  "390",
+  "389",
+  "388",
+  "387",
+  "386",
+  "385",
+  "384",
+  "383",
+  "382",
+  "381",
+  "380",
+  "20",
+  "40",
+  "80",
+  "60",
+  "120",
+  "160",
+  "140",
+  "180",
+  "200",
+  "199",
+  "220",
+  "240",
+  "260",
+  "280",
+  "300",
+  "340",
+  "360",
+  "61",
+  "62",
+  "63",
+  "64",
+  "65",
+  "85",
+  "105",
+  "125",
+  "145",
+  "144",
+  "143",
+  "142",
+  "141",
+  "278",
+  "277",
+  "257",
+  "256",
+  "255",
+  "275",
+  "295",
+  "294",
+  "293",
+  "313",
+  "333",
+  "334",
+  "335",
+  "355",
+  "356",
+  "357",
+  "337",
+  "338",
+  "148",
+  "146",
+  "151",
+  "153",
+  "155",
+  "157",
+  "116",
+  "114",
+  "112",
+  "107",
+  "68",
+  "70",
+  "72",
+  "74",
+  "76",
+  "29",
+  "33",
+  "184",
+  "183",
+  "182",
+  "202",
+  "203",
+  "204",
+  "309",
+  "310",
+  "195",
+  "215",
+  "227",
+  "247",
+  "248",
+  "232",
+  "252",
+  "251",
+  "311",
+  "331",
+  "330",
+  "329",
+  "349",
+  "350",
+  "351",
+  "308",
+  "307",
+  "306",
+  "305",
+  "323",
+  "322",
+  "342",
+  "343",
+  "264",
+  "244",
+  "243",
+  "242",
+  "262",
+  "263",
+];
 //array of maps
-const mapArray = [map1Wall, map2Wall, map3Wall, map4Wall];
+const mapArray = [map1Wall, map2Wall, map3Wall, map4Wall, map5Wall];
 //basic gameplay functionality
 startButton.addEventListener("click", () => {
   beginGamePlay();
@@ -674,8 +836,14 @@ mapChoice.forEach((button, index) => {
 });
 //assigning the map
 function buildWall(selection) {
+  //map building functionality
+  // grid.addEventListener("click", (event) => {
+  //   console.log(parseInt(event.target.id));
+  //   tempArray.push(event.target.id);
+  //   event.target.classList.add("sanctum5");
+  //   console.log(tempArray);
+  // });
   let sanctum = sanctum1;
-
   ///
   let walls = mapArray[selection];
   //capslock reminder
@@ -789,13 +957,7 @@ function buildWall(selection) {
   //   }
   // });
 }
-//mapBuilder
-// grid.addEventListener("click", (event) => {
-//   console.log(parseInt(event.target.id));
-//   tempArray.push(event.target.id);
-//   event.target.classList.add("sanctum");
-//   console.log(tempArray);
-// });
+
 //building the buttons
 
 //locating pacman
@@ -1146,7 +1308,7 @@ function beginGamePlay() {
   setInterval(() => {
     let newDirection = findPacMan();
     directionCheck(newDirection);
-  }, 1000);
+  }, 500);
 
   //SUBMARINE 2 MOVEMENT
   function findPacMan2() {
@@ -1253,16 +1415,14 @@ function beginGamePlay() {
   setInterval(() => {
     let newDirection = findPacMan2();
     directionCheck2(newDirection);
-  }, 1000);
+  }, 500);
 
   //modal triggered on death
   function deathModal() {
-    modal.innerHTML = `💀 YOU LOST A LIFE 💀 `;
-    modal.style.display = "block";
+    notifications.innerHTML = `💀 YOU LOST A LIFE 💀 `;
     setTimeout(() => {
-      modal.style.display = "none";
-      modal.innerHTML = "";
-    }, 700);
+      notifications.innerHTML = "ON ACTIVE PATROL";
+    }, 2000);
   }
   //submarine 3 patrols for booze
   //SUBMARINE 3 MOVEMENT
@@ -1348,7 +1508,7 @@ function beginGamePlay() {
   setInterval(() => {
     let newDirection = findAlcohol();
     directionCheck3(newDirection);
-  }, 1000);
+  }, 500);
 
   //detecting contacts between pacman and ghosts
   function detectDeath() {
@@ -1395,6 +1555,10 @@ function beginGamePlay() {
         cells[alcohol].classList.add("alcohol");
         currentLives++;
         lifeSpan.textContent = currentLives;
+        notifications.innerHTML = `♥️YOU GAINED A LIFE♥️`;
+        setTimeout(() => {
+          notifications.innerHTML = "ON ACTIVE PATROL";
+        }, 2000);
       }
       if (cells[alcohol].classList.contains("submarine3")) {
         console.log("alcohol consumed by submarine");
