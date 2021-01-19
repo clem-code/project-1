@@ -6,8 +6,6 @@ body {
   height: 140vh;
   display: flex;
   background-color: black;
-  /* justify-content: space-around;
-  align-items: center; */
   flex-direction: column;
   margin: 0;
 }
@@ -82,8 +80,8 @@ button {
 .scoreboard {
   height: 300px;
   width: 300px;
-  border: 1px solid violet;
-  background-color: darkblue;
+  border: 1px solid #e25822;
+  background-color: black
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -92,13 +90,19 @@ button {
 }
 
 .score {
-  color: hotpink;
+  color: crimson;
   font-size: 40px;
   font-weight: bold;
   font-family: VT323;
   text-align: center;
 }
 #highScore {
+  color: #e25822;
+}
+#lifeSpan {
+  color: #e25822;
+}
+#scoreSpan {
   color: #e25822;
 }
 .grid {
@@ -127,15 +131,15 @@ button {
   display: inline-block;
 }
 .cell {
-  /* border: 1px solid violet; */
+  
   font-size: 10px;
   background-color: darkblue;
   border-radius: 10px;
 }
 .wall {
-  background-color: sandybrown;
+  background-color: goldenrod;
   color: white;
-  /* border-radius: 10px; */
+  
 }
 .pacman {
   background-image: url("red_submarine.png");
@@ -155,10 +159,10 @@ button {
   background-color: hotpink;
 }
 .sanctum {
-  animation: pulse 3s infinite;
+  background-color: mediumblue;
 }
 #notifications {
-  animation: pulse1 3s infinite;
+  animation: pulse1 2s infinite;
   font-family: VT323;
   font-size: 30px;
 }
@@ -191,7 +195,7 @@ button {
   background-size: contain;
   /* background-color: black; */
 }
-.ghost2 {
+.submarine4 {
   background-image: url("submarine4.png");
   background-size: contain;
   /* background-color: black; */
@@ -212,41 +216,56 @@ button {
 .pacmanClose {
   background-color: rgba(230, 183, 240, 0.8);
   filter: brightness(100%);
-  animation: pulse 3s infinite;
+  animation: pulse2 2s infinite;
 }
 
-@keyframes pulse {
-  0% {
+@keyframes pulse2 {
+  0%, 100% {
     background-color: midnightblue;
   }
-  100% {
-    background-color: darkblue;
+  30%, 70%{
+    background-color: mediumblue;
+  }
+  40%,60% {
+    background-color: turquoise;
+  }
+  45%, 55%{
+    background-color: yellowgreen;
+  }
+  48%, 52%{
+    background-color: chartreuse;
+  }
+  50%{
+    background-color: lime;
   }
 }
-.submarineScan {
-  /* background-color: hotpink; */
-  /* background-image: url("sonar.gif");
-  transform: rotate(90deg); */
-}
 
-.submarine2Scan {
-  /* background-color: gold;
-  filter: brightness(100%); */
-  /* background-image: url("sonar.gif");
-  transform: rotate(90deg); */
-}
 .submarine {
   background-image: url("subred.png");
   background-size: contain;
-  transform: rotate(0deg);
-  /* background-color: black; */
+ 
 }
 .submarine2 {
   background-image: url("subgreen.png");
   background-size: contain;
-  /* background-color: black; */
+  
 }
 .alcohol {
   background-image: url("alcohol.png");
   background-size: contain;
+}
+.endCell{
+  background-color: black;
+}
+#putin{
+  position: absolute;
+  width: 400px;
+  display: none;
+  z-index: 1;
+}
+#stop{
+  display: none;
+}
+#reset{
+  display: none;
 }

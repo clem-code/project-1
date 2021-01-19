@@ -2,12 +2,30 @@ const grid = document.querySelector(".grid");
 const notifications = document.getElementById("notifications");
 // const modalImg = document.getElementById("modID");
 const startButton = document.getElementById("start");
+const stopButton = document.getElementById("stop");
+const resetButton = document.getElementById("reset");
+
 const width = 20;
 const cells = [];
 const jewels = [];
 let curScore = 0;
-let currentLives = 3;
+let currentLives = 2;
 scoreSpan.textContent = curScore;
+const leftMov = -1;
+const rightMov = 1;
+const upMov = -width;
+const downMov = width;
+const movArray = [leftMov, rightMov, upMov, downMov];
+//declaring variables for setIntervals
+let directionOfTravel;
+let pacmanOrientation;
+let directionOfTravelSubmarine4;
+let sub1MovFunc;
+let sub2MovFunc;
+let sonarTrigger;
+let alcoholHunter;
+let deathInterval;
+
 // const walls = [];
 //types of maps
 //MAP 1 classic
@@ -443,12 +461,10 @@ const map3Wall = [
   "23",
   "43",
   "42",
-  "188",
-  "189",
-  "190",
-  "210",
-  "209",
-  "208",
+  "227",
+  "248",
+  "195",
+  "204",
   "355",
   "375",
   "376",
@@ -816,33 +832,76 @@ const map5Wall = [
 //array of maps
 const mapArray = [map1Wall, map2Wall, map3Wall, map4Wall, map5Wall];
 //basic gameplay functionality
+let beginGame;
+let counter = 0;
+//
+let pacman;
+let submarine;
+let submarine2;
+let submarine3;
+let submarine4;
+let alcohol;
+
+//
+function playIntervalOff() {
+  // clearInterval(beginGame);
+  // return;
+}
 startButton.addEventListener("click", () => {
+  //begin set interval
+  startButton.style.display = "none";
+  resetButton.style.display = "block";
   beginGamePlay();
 });
+resetButton.addEventListener("click", () => {
+  document.querySelector(".hero").scrollIntoView();
+  location.reload();
+});
+function gameEnd() {
+  cells.forEach((cell) => {
+    cell.classList.remove("notBarrier");
+    cell.classList.remove("junction");
+    cell.classList.remove("sanctum");
+    cell.classList.remove("alcohol");
+    cell.classList.remove("jewel");
+    cell.classList.remove("pacmanClose");
+    cell.classList.add("endCell");
+    cell.style.color = "black";
+  });
+  clearInterval(directionOfTravel);
+  clearInterval(directionOfTravelSubmarine4);
+  clearInterval(sub1MovFunc);
+  clearInterval(sub2MovFunc);
+  clearInterval(sonarTrigger);
+  clearInterval(alcoholHunter);
+  console.log(submarine, typeof submarine, parseInt(submarine));
+  cells[pacman].classList.remove("pacman");
+  cells[submarine].classList.remove("submarine");
+  cells[submarine2].classList.remove("submarine2");
+  cells[submarine3].classList.remove("submarine3");
+  cells[submarine4].classList.remove("submarine4");
+  cells[alcohol].classList.remove("alcohol");
+  scoreSpan.textContent = "";
+  document.getElementById("putin").style.display = "block";
+  setTimeout(() => {
+    document.querySelector(".hero").scrollIntoView();
+    location.reload();
+  }, 3500);
+}
+stopButton.addEventListener("click", gameEnd);
+
 const mapChoice = document.querySelectorAll(".mapChoice");
 mapChoice.forEach((button, index) => {
   button.setAttribute("map", index);
   button.addEventListener("click", (event) => {
     event.preventDefault();
-    console.log(event.target.getAttribute("map"));
     const selection = parseInt(event.target.getAttribute("map"));
-    console.log("look here", selection);
-    console.log("FIRST YOU SEE ME", selection, typeof selection);
-    // walls = mapArray[selection];
-    console.log("NOW YOU SEE ME");
     buildWall(selection);
     document.getElementById("grid").scrollIntoView();
   });
 });
 //assigning the map
 function buildWall(selection) {
-  //map building functionality
-  // grid.addEventListener("click", (event) => {
-  //   console.log(parseInt(event.target.id));
-  //   tempArray.push(event.target.id);
-  //   event.target.classList.add("sanctum5");
-  //   console.log(tempArray);
-  // });
   let sanctum = sanctum1;
   ///
   let walls = mapArray[selection];
@@ -887,12 +946,6 @@ function buildWall(selection) {
     const idCell = Number(cell);
     document.getElementById(idCell).classList.add("sanctum");
   });
-
-  // startButton.addEventListener("click", () => {
-  //   // gameIsPlaying();
-  //   console.log(`${gameIsPlaying}`);
-  //   startButton.style.display = "none";
-  // });
   //designating junction cells
   //a junction is where a column and a row meets
   //logic -- create an array of all cells that aren't walls
@@ -946,19 +999,7 @@ function buildWall(selection) {
       return cell.classList.remove("junction");
     }
   });
-  // cells.forEach((cell) => {
-  //   if (
-  //     !cell.classList.contains("wall") &&
-  //     !cell.classList.contains("sanctum") &&
-  //     !cell.classList.contains("pacman")
-  //   ) {
-  //     cell.classList.add("jewel");
-  //     jewels.push(cell);
-  //   }
-  // });
 }
-
-//building the buttons
 
 //locating pacman
 //pacman
@@ -973,20 +1014,28 @@ function beginGamePlay() {
       jewels.push(cell);
     }
   });
-  let pacman = pacmanCreator();
+  // let pacman = pacmanCreator();
+  pacman = pacmanCreator();
+  submarine = sub1Creator();
+  submarine2 = sub2Creator();
+  submarine3 = sub3Creator();
+  submarine4 = sub4Creator();
   // console.log("this is pacman", pacman, typeof pacman);
   cells[pacman].classList.add("pacman");
   //submarines 1,2,3
-  let submarine = sub1Creator();
-  let submarine2 = sub2Creator();
-  let submarine3 = sub3Creator();
+  // let submarine = sub1Creator();
+  // let submarine2 = sub2Creator();
+  // let submarine3 = sub3Creator();
+  // let submarine4 = sub4Creator();
   cells[submarine].classList.add("submarine");
   cells[submarine2].classList.add("submarine2");
   cells[submarine3].classList.add("submarine3");
+  cells[submarine4].classList.add("submarine4");
   //alcohol prize creator
-  let alcohol = alcoholCreator();
+  alcohol = alcoholCreator();
   cells[alcohol].classList.add("alcohol");
   //creation code
+
   function pacmanCreator() {
     const randJewel = Math.floor(Math.random() * jewels.length);
     // console.log(parseInt(jewels[randJewel].id));
@@ -1022,40 +1071,44 @@ function beginGamePlay() {
       filteredSanctum[Math.floor(Math.random() * filteredSanctum.length)]
     ));
   }
+  function sub4Creator() {
+    const filteredSanctum = sanctum1.filter((cell) => {
+      if (!cells[cell].classList.contains("wall")) {
+        return cell;
+      }
+    });
+    return (submarine4Gen = parseInt(
+      filteredSanctum[Math.floor(Math.random() * filteredSanctum.length)]
+    ));
+  }
   function alcoholCreator() {
     const randJewel = Math.floor(Math.random() * jewels.length);
     // console.log(parseInt(jewels[randJewel].id));
     return parseInt(jewels[randJewel].id);
   }
-  // adding the jewels
 
-  // movement code
-  let directionOfTravel;
-  let directionOfTravelGhost1;
-  let directionOfTravelGhost2;
-  // let directionOfTravelGhost3;
-  // let directionOfTravelGhost4;
-  let keyControl;
-  const leftMov = -1;
-  const rightMov = 1;
-  const upMov = -width;
-  const downMov = width;
-  const movArray = [leftMov, rightMov, upMov, downMov];
+  // submarine movement code
+  // let directionOfTravel;
+
   document.addEventListener("keyup", (event) => {
-    if (event.key === "w") {
+    if (event.key === "w" || event.key === "W") {
       console.log(`You hit ${event.key}`);
+      pacmanOrientation = "rotateZ(-0.25turn)";
       movChange(upMov);
     }
-    if (event.key === "a") {
+    if (event.key === "a" || event.key === "A") {
       console.log(`You hit ${event.key}`);
+      pacmanOrientation = "rotateY(3.142rad)";
       movChange(leftMov);
     }
-    if (event.key === "s") {
+    if (event.key === "s" || event.key === "S") {
       console.log(`You hit ${event.key}`);
+      pacmanOrientation = "rotateZ(90deg)";
       movChange(downMov);
     }
-    if (event.key === "d") {
+    if (event.key === "d" || event.key === "D") {
       console.log(`You hit ${event.key}`);
+      pacmanOrientation = "rotateY(0deg)";
       movChange(rightMov);
     }
   });
@@ -1083,12 +1136,20 @@ function beginGamePlay() {
             cells[pacman + direction].classList.remove("jewel");
             console.log("you have eaten a jewel");
             curScore++;
+            jewels.pop();
+            console.log("jewels.length is", jewels.length);
+            if (jewels.length === 0) {
+              notifications.innerHTML = "😎YOU WIN😎";
+              notifications.style.fontSize = "50px";
+              gameEnd();
+            }
             console.log(curScore);
             scoreSpan.textContent = curScore;
             console.log(scoreSpan.textContent);
           }
           pacman += direction;
           cells[pacman].classList.add("pacman");
+          cells[pacman].style.transform = pacmanOrientation;
         }
       }, 300);
     }
@@ -1192,7 +1253,7 @@ function beginGamePlay() {
     columnDown();
     columnUp();
   }
-  setInterval(() => {
+  sonarTrigger = setInterval(() => {
     sonar();
   }, 2000);
   //submarine movement
@@ -1305,7 +1366,7 @@ function beginGamePlay() {
   // if (cells[submarine + direction].classList.contains("wall")) {
   //   console.log("this cell is not a wall");
   // }
-  setInterval(() => {
+  sub1MovFunc = setInterval(() => {
     let newDirection = findPacMan();
     directionCheck(newDirection);
   }, 500);
@@ -1412,7 +1473,7 @@ function beginGamePlay() {
   }
   //
   // }
-  setInterval(() => {
+  sub2MovFunc = setInterval(() => {
     let newDirection = findPacMan2();
     directionCheck2(newDirection);
   }, 500);
@@ -1420,7 +1481,7 @@ function beginGamePlay() {
   //modal triggered on death
   function deathModal() {
     notifications.innerHTML = `💀 YOU LOST A LIFE 💀 `;
-    setTimeout(() => {
+    deathInterval = setTimeout(() => {
       notifications.innerHTML = "ON ACTIVE PATROL";
     }, 2000);
   }
@@ -1505,7 +1566,7 @@ function beginGamePlay() {
   }
   //
   // }
-  setInterval(() => {
+  alcoholHunter = setInterval(() => {
     let newDirection = findAlcohol();
     directionCheck3(newDirection);
   }, 500);
@@ -1516,9 +1577,9 @@ function beginGamePlay() {
     const checker = setInterval(() => {
       if (
         cells[pacman].classList.contains("submarine") ||
-        cells[pacman].classList.contains("submarine2")
-        // cells[pacman].classList.contains("ghost1") ||
-        // cells[pacman].classList.contains("ghost2")
+        cells[pacman].classList.contains("submarine2") ||
+        cells[pacman].classList.contains("submarine3") ||
+        cells[pacman].classList.contains("submarine4")
       ) {
         console.log("pacman is dead");
         cells.forEach((cell) => {
@@ -1529,48 +1590,127 @@ function beginGamePlay() {
         pacman = pacmanCreator();
         clearInterval(directionOfTravel);
         currentLives--;
-        lifeSpan.textContent = currentLives;
         deathModal();
+        if (currentLives === 0) {
+          clearInterval(deathInterval);
+          notifications.innerHTML = "😭YOU LOSE😭";
+          notifications.style.fontSize = "50px";
+          gameEnd();
+        }
+
+        lifeSpan.textContent = currentLives;
       }
-    }, 300);
+    }, 250);
   }
   detectDeath();
   //detecting if Pacman drinks the alcohol
   function detectAlcohol() {
     console.log("detect alcohol has been fired");
     const checker = setInterval(() => {
-      if (
-        cells[alcohol].classList.contains("pacman")
-        // cells[pacman].classList.contains("submarine2")
-        // cells[pacman].classList.contains("ghost1") ||
-        // cells[pacman].classList.contains("ghost2")
-      ) {
-        console.log("alcohol consumed");
+      if (cells[alcohol].classList.contains("pacman")) {
+        console.log("alcohol consumed by pacman");
         cells.forEach((cell) => {
           if (cell.classList.contains("alcohol")) {
             return cell.classList.remove("alcohol");
           }
         });
-        alcohol = alcoholCreator();
-        cells[alcohol].classList.add("alcohol");
         currentLives++;
         lifeSpan.textContent = currentLives;
         notifications.innerHTML = `♥️YOU GAINED A LIFE♥️`;
         setTimeout(() => {
           notifications.innerHTML = "ON ACTIVE PATROL";
         }, 2000);
+        setTimeout(() => {
+          alcohol = alcoholCreator();
+          cells[alcohol].classList.add("alcohol");
+          cells[alcohol].style.transform = "rotateZ(-0.25turn)";
+        }, 2000);
       }
-      if (cells[alcohol].classList.contains("submarine3")) {
+      if (
+        cells[alcohol].classList.contains("submarine3") ||
+        cells[alcohol].classList.contains("submarine1") ||
+        cells[alcohol].classList.contains("submarine2") ||
+        cells[alcohol].classList.contains("submarine4")
+      ) {
         console.log("alcohol consumed by submarine");
         cells.forEach((cell) => {
           if (cell.classList.contains("alcohol")) {
             return cell.classList.remove("alcohol");
           }
         });
+        // setTimeout(() => {
         alcohol = alcoholCreator();
         cells[alcohol].classList.add("alcohol");
+        // }, 2000);
       }
-    }, 300);
+    }, 200);
   }
   detectAlcohol();
+
+  //submarine 4
+  //does a random movement and continues in that direction until he hits an obstacle
+  //ghost movements -- random
+  const randomMovement = function () {
+    let randomNum = Math.floor(Math.random() * 4);
+    let randomMov = movArray[randomNum];
+    return randomMov;
+  };
+  // const checkRandomMov = function (randomMov) {
+  //   if (cells[submarine4 + randomMov].classList.contains("wall")) {
+  //     // console.log("cannot go in here, this is a wall");
+  //     randomMovement();
+  //   } else if (!cells[submarine4 + randomMov].classList.contains("wall")) {
+  //     // console.log("all good -- this is not a wall");
+  //     return randomMov;
+  //   }
+  // };
+  // let directionOfTravelSubmarine4;
+  // let submarine4IsMoving = true;
+  function submarine4Mov(direction) {
+    // submarine4IsMoving = true;
+    // console.log(`${ghostOneIsMoving}`);
+    if (cells[submarine4 + direction].classList.contains("wall")) {
+      console.log("the fail safe has been triggered");
+      clearInterval(directionOfTravelSubmarine4);
+      submarine4Mov(randomMovement());
+      // console.log(`${ghostOneIsMoving}`);
+      return;
+    }
+    //if it is, trigger set interval
+    else if (!cells[submarine4 + direction].classList.contains("wall")) {
+      clearInterval(directionOfTravelSubmarine4);
+      directionOfTravelSubmarine4 = setInterval(() => {
+        console.log("sub4 is  now moving");
+
+        //rotation
+        //to come
+        //clears if hits an obstacle
+        if (cells[submarine4 + direction].classList.contains("wall")) {
+          clearInterval(directionOfTravelSubmarine4);
+          console.log("sub4 hit an obstacle");
+
+          submarine4Mov(randomMovement());
+          // console.log(`${ghostOneIsMoving}`);
+          // keyControl = 0;
+        }
+        if (cells[submarine4 + direction].classList.contains("junction")) {
+          clearInterval(directionOfTravelSubmarine4);
+          // console.log("interval cleared for a junction");
+          // submarine4IsMoving = false;
+          submarine4Mov(randomMovement());
+          // console.log(`${ghostOneIsMoving}`);
+          // keyControl = 0;
+        }
+        //continues if the way is clear
+        if (!cells[submarine4 + direction].classList.contains("wall")) {
+          // console.log("ghost says the way is clear");
+          cells[submarine4].classList.remove("submarine4");
+          submarine4 += direction;
+          cells[submarine4].classList.add("submarine4");
+        }
+      }, 300);
+    }
+  }
+  // while (submarine4IsMoving === false) {
+  submarine4Mov(randomMovement());
 }
