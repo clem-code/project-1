@@ -30,9 +30,10 @@
             <li>Collect All Treasure To Win</li>
             <li>Drink Vodka For Extra Lives</li>
             <li>Keep An Eye On The Time</li>
+            <li>WASD Controls</li>
           </ul>
         </div>
-        <div class="infobox">
+        <div class="infobox maps">
           <h2>MAPS</h2>
           <a href="#grid"><button class="mapChoice">CLASSIC</button></a>
           <a href="#grid"><button class="mapChoice">CAVERNS</button></a>
@@ -58,10 +59,18 @@
         </div>
       </div>
       <div class="gameBoards">
-        <div class="scoreboard" id="notifications">ON ACTIVE PATROL</div>
+        <div class="scoreboard right" id="notifications"></div>
+        <div class="scoreboard right" id="timer">
+          <a
+            ><span id="minutes">0:</span><span id="seconds">00:</span
+            ><span id="milliseconds">000</span></a
+          >
+        </div>
       </div>
       <div class="grid" id="grid"><img id="putin" src="putinlaugh.JPG" /></div>
     </div>
+    <audio src="sonar.wav"></audio>
+    <footer><img id="speaker" src="speaker1.png" /></footer>
     <script src="script.js"></script>
   </body>
 </html>

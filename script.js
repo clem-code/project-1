@@ -1,10 +1,13 @@
 const grid = document.querySelector(".grid");
 const notifications = document.getElementById("notifications");
+notifications.innerHTML = "ON ACTIVE PATROL";
 // const modalImg = document.getElementById("modID");
 const startButton = document.getElementById("start");
 const stopButton = document.getElementById("stop");
 const resetButton = document.getElementById("reset");
-
+const audioPlayer = document.querySelector("audio");
+const speakerButton = document.getElementById("speaker");
+const timer = document.getElementById("timer");
 const width = 20;
 const cells = [];
 const jewels = [];
@@ -268,111 +271,54 @@ const sanctum1 = [
 ];
 //MAP 2 caverns
 const map2Wall = [
-  "0",
-  "1",
-  "2",
-  "3",
-  "4",
-  "20",
-  "21",
-  "22",
-  "24",
-  "23",
-  "24",
-  "25",
-  "27",
-  "26",
-  "28",
-  "29",
-  "30",
-  "31",
-  "33",
-  "32",
-  "34",
-  "35",
-  "36",
-  "37",
-  "38",
-  "57",
-  "56",
-  "55",
-  "76",
-  "52",
-  "51",
-  "50",
-  "70",
-  "49",
-  "48",
-  "68",
-  "69",
-  "88",
-  "87",
-  "67",
-  "66",
-  "65",
-  "64",
-  "84",
-  "85",
-  "105",
-  "104",
-  "161",
-  "182",
-  "203",
-  "202",
-  "201",
-  "181",
+  "226",
+  "225",
+  "224",
   "222",
   "221",
-  "241",
-  "301",
-  "321",
-  "322",
-  "343",
-  "342",
-  "341",
-  "361",
-  "362",
-  "363",
-  "364",
-  "248",
-  "250",
-  "249",
-  "251",
-  "271",
-  "270",
-  "269",
-  "268",
-  "288",
-  "289",
-  "291",
-  "298",
-  "297",
-  "296",
-  "295",
-  "294",
-  "314",
-  "334",
-  "374",
-  "377",
-  "378",
-  "358",
-  "357",
-  "118",
-  "117",
-  "116",
-  "115",
-  "135",
-  "155",
-  "175",
-  "195",
-  "215",
-  "255",
-  "275",
-  "178",
-  "176",
+  "233",
+  "234",
+  "236",
   "237",
-  "257",
+  "256",
+  "276",
+  "296",
+  "316",
+  "336",
+  "244",
+  "264",
+  "284",
+  "304",
+  "324",
+  "147",
+  "167",
+  "151",
+  "152",
+  "172",
+  "227",
+  "247",
+  "248",
+  "251",
+  "252",
+  "232",
+  "146",
+  "145",
+  "144",
+  "143",
+  "142",
+  "140",
+  "88",
+  "68",
+  "48",
+  "28",
+  "8",
   "0",
+  "20",
+  "40",
+  "60",
+  "80",
+  "100",
+  "120",
   "1",
   "2",
   "3",
@@ -380,17 +326,17 @@ const map2Wall = [
   "5",
   "6",
   "7",
-  "8",
-  "9",
-  "10",
+  "91",
+  "71",
+  "51",
+  "31",
   "11",
   "12",
   "13",
   "14",
   "15",
-  "17",
-  "17",
   "16",
+  "17",
   "18",
   "19",
   "39",
@@ -400,6 +346,55 @@ const map2Wall = [
   "119",
   "139",
   "159",
+  "158",
+  "157",
+  "156",
+  "155",
+  "154",
+  "153",
+  "9",
+  "10",
+  "267",
+  "287",
+  "307",
+  "327",
+  "328",
+  "331",
+  "332",
+  "312",
+  "292",
+  "272",
+  "388",
+  "387",
+  "386",
+  "385",
+  "384",
+  "383",
+  "382",
+  "381",
+  "380",
+  "160",
+  "180",
+  "200",
+  "220",
+  "240",
+  "260",
+  "280",
+  "300",
+  "320",
+  "340",
+  "360",
+  "389",
+  "390",
+  "391",
+  "392",
+  "393",
+  "394",
+  "395",
+  "396",
+  "397",
+  "398",
+  "399",
   "179",
   "199",
   "219",
@@ -411,43 +406,31 @@ const map2Wall = [
   "339",
   "359",
   "379",
-  "399",
-  "380",
-  "381",
-  "382",
-  "383",
-  "384",
-  "385",
-  "386",
-  "387",
-  "388",
-  "389",
-  "390",
-  "391",
-  "392",
-  "393",
-  "394",
-  "395",
-  "396",
-  "397",
-  "398",
-  "280",
-  "260",
-  "300",
-  "320",
-  "340",
-  "360",
-  "40",
-  "60",
-  "80",
-  "100",
-  "120",
-  "140",
-  "180",
-  "160",
-  "200",
-  "220",
-  "240",
+  "81",
+  "82",
+  "84",
+  "86",
+  "87",
+  "64",
+  "44",
+
+  "92",
+  "94",
+  "95",
+  "96",
+  "98",
+  "75",
+  "55",
+
+  "166",
+  "165",
+  "164",
+  "163",
+  "173",
+  "174",
+  "175",
+  "176",
+  "148",
 ];
 //MAP 3
 //OPEN WATER
@@ -841,17 +824,17 @@ let submarine2;
 let submarine3;
 let submarine4;
 let alcohol;
-
-//
-function playIntervalOff() {
-  // clearInterval(beginGame);
-  // return;
-}
+// audio
+let sonarAudio;
+let sonarIsPlaying = false;
+//buttons
 startButton.addEventListener("click", () => {
   //begin set interval
   startButton.style.display = "none";
   resetButton.style.display = "block";
   beginGamePlay();
+  audioToggle();
+  timeLapse();
 });
 resetButton.addEventListener("click", () => {
   document.querySelector(".hero").scrollIntoView();
@@ -874,7 +857,6 @@ function gameEnd() {
   clearInterval(sub2MovFunc);
   clearInterval(sonarTrigger);
   clearInterval(alcoholHunter);
-  console.log(submarine, typeof submarine, parseInt(submarine));
   cells[pacman].classList.remove("pacman");
   cells[submarine].classList.remove("submarine");
   cells[submarine2].classList.remove("submarine2");
@@ -882,14 +864,41 @@ function gameEnd() {
   cells[submarine4].classList.remove("submarine4");
   cells[alcohol].classList.remove("alcohol");
   scoreSpan.textContent = "";
+  timer.innerHTML = "GAME OVER";
+  notifications.innerHTML = "GAME OVER";
   document.getElementById("putin").style.display = "block";
   setTimeout(() => {
     document.querySelector(".hero").scrollIntoView();
     location.reload();
   }, 3500);
 }
-stopButton.addEventListener("click", gameEnd);
-
+// stopButton.addEventListener("click", gameEnd);
+function audioToggle() {
+  console.log("audio toggle has been fired");
+  if (sonarIsPlaying === true) {
+    audioOff();
+  } else if (sonarIsPlaying === false) {
+    audioOn();
+  }
+}
+function audioOff() {
+  document.getElementById("speaker").src = "speaker.png";
+  clearInterval(sonarAudio);
+  sonarIsPlaying = false;
+  return;
+}
+function audioOn() {
+  document.getElementById("speaker").src = "speaker1.png";
+  sonarAudio = setInterval(() => {
+    audioPlayer.play();
+  }, 3000);
+  sonarIsPlaying = true;
+  return;
+}
+speakerButton.addEventListener("click", () => {
+  console.log("the speaker button has been hit");
+  audioToggle();
+});
 const mapChoice = document.querySelectorAll(".mapChoice");
 mapChoice.forEach((button, index) => {
   button.setAttribute("map", index);
@@ -898,6 +907,7 @@ mapChoice.forEach((button, index) => {
     const selection = parseInt(event.target.getAttribute("map"));
     buildWall(selection);
     document.getElementById("grid").scrollIntoView();
+    document.querySelector(".maps").innerHTML = "<h2>MAPS</h2>";
   });
 });
 //assigning the map
@@ -905,15 +915,7 @@ function buildWall(selection) {
   let sanctum = sanctum1;
   ///
   let walls = mapArray[selection];
-  //capslock reminder
-  document.addEventListener("keydown", (event) => {
-    console.log(event.key);
-    if (event.key === "CapsLock") {
-      alert("CAPSLOCK ON: Game is not going to work!");
-    }
-  });
   //
-  const tempArray = [];
   const scoreSpan = document.getElementById("scoreSpan");
   const lifeSpan = document.getElementById("lifeSpan");
   const highScoreSpan = document.getElementById("highScore");
@@ -937,14 +939,12 @@ function buildWall(selection) {
 
   //building the walls
 
-  walls.forEach((wall) => {
-    const idWall = Number(wall);
-    document.getElementById(idWall).classList.add("wall");
+  walls.forEach((cell) => {
+    cells[cell].classList.add("wall");
   });
   //building sanctum
   sanctum.forEach((cell) => {
-    const idCell = Number(cell);
-    document.getElementById(idCell).classList.add("sanctum");
+    cells[cell].classList.add("sanctum");
   });
   //designating junction cells
   //a junction is where a column and a row meets
@@ -1014,19 +1014,14 @@ function beginGamePlay() {
       jewels.push(cell);
     }
   });
-  // let pacman = pacmanCreator();
+  // make pacman
   pacman = pacmanCreator();
+  cells[pacman].classList.add("pacman");
+  //make subs
   submarine = sub1Creator();
   submarine2 = sub2Creator();
   submarine3 = sub3Creator();
   submarine4 = sub4Creator();
-  // console.log("this is pacman", pacman, typeof pacman);
-  cells[pacman].classList.add("pacman");
-  //submarines 1,2,3
-  // let submarine = sub1Creator();
-  // let submarine2 = sub2Creator();
-  // let submarine3 = sub3Creator();
-  // let submarine4 = sub4Creator();
   cells[submarine].classList.add("submarine");
   cells[submarine2].classList.add("submarine2");
   cells[submarine3].classList.add("submarine3");
@@ -1035,7 +1030,6 @@ function beginGamePlay() {
   alcohol = alcoholCreator();
   cells[alcohol].classList.add("alcohol");
   //creation code
-
   function pacmanCreator() {
     const randJewel = Math.floor(Math.random() * jewels.length);
     // console.log(parseInt(jewels[randJewel].id));
@@ -1131,7 +1125,9 @@ function beginGamePlay() {
         //continues if the way is clear
         if (!cells[pacman + direction].classList.contains("wall")) {
           // console.log("the way is clear");
+          cells[pacman].style.transform = "rotateY(0deg)";
           cells[pacman].classList.remove("pacman");
+
           if (cells[pacman + direction].classList.contains("jewel")) {
             cells[pacman + direction].classList.remove("jewel");
             console.log("you have eaten a jewel");
@@ -1151,7 +1147,7 @@ function beginGamePlay() {
           cells[pacman].classList.add("pacman");
           cells[pacman].style.transform = pacmanOrientation;
         }
-      }, 300);
+      }, 250);
     }
   }
   function sonar() {
@@ -1369,7 +1365,7 @@ function beginGamePlay() {
   sub1MovFunc = setInterval(() => {
     let newDirection = findPacMan();
     directionCheck(newDirection);
-  }, 500);
+  }, 350);
 
   //SUBMARINE 2 MOVEMENT
   function findPacMan2() {
@@ -1476,7 +1472,7 @@ function beginGamePlay() {
   sub2MovFunc = setInterval(() => {
     let newDirection = findPacMan2();
     directionCheck2(newDirection);
-  }, 500);
+  }, 350);
 
   //modal triggered on death
   function deathModal() {
@@ -1569,7 +1565,7 @@ function beginGamePlay() {
   alcoholHunter = setInterval(() => {
     let newDirection = findAlcohol();
     directionCheck3(newDirection);
-  }, 500);
+  }, 300);
 
   //detecting contacts between pacman and ghosts
   function detectDeath() {
@@ -1590,17 +1586,18 @@ function beginGamePlay() {
         pacman = pacmanCreator();
         clearInterval(directionOfTravel);
         currentLives--;
-        deathModal();
-        if (currentLives === 0) {
+        if (currentLives > 0) {
+          deathModal();
+        } else if (currentLives < 1) {
+          gameEnd();
           clearInterval(deathInterval);
           notifications.innerHTML = "😭YOU LOSE😭";
           notifications.style.fontSize = "50px";
-          gameEnd();
         }
 
         lifeSpan.textContent = currentLives;
       }
-    }, 250);
+    }, 150);
   }
   detectDeath();
   //detecting if Pacman drinks the alcohol
@@ -1620,11 +1617,11 @@ function beginGamePlay() {
         setTimeout(() => {
           notifications.innerHTML = "ON ACTIVE PATROL";
         }, 2000);
-        setTimeout(() => {
-          alcohol = alcoholCreator();
-          cells[alcohol].classList.add("alcohol");
-          cells[alcohol].style.transform = "rotateZ(-0.25turn)";
-        }, 2000);
+        // setTimeout(() => {
+        alcohol = alcoholCreator();
+        cells[alcohol].classList.add("alcohol");
+        cells[alcohol].style.transform = "rotateY(0deg)";
+        // }, 2000);
       }
       if (
         cells[alcohol].classList.contains("submarine3") ||
@@ -1655,17 +1652,7 @@ function beginGamePlay() {
     let randomMov = movArray[randomNum];
     return randomMov;
   };
-  // const checkRandomMov = function (randomMov) {
-  //   if (cells[submarine4 + randomMov].classList.contains("wall")) {
-  //     // console.log("cannot go in here, this is a wall");
-  //     randomMovement();
-  //   } else if (!cells[submarine4 + randomMov].classList.contains("wall")) {
-  //     // console.log("all good -- this is not a wall");
-  //     return randomMov;
-  //   }
-  // };
-  // let directionOfTravelSubmarine4;
-  // let submarine4IsMoving = true;
+  //main movement code
   function submarine4Mov(direction) {
     // submarine4IsMoving = true;
     // console.log(`${ghostOneIsMoving}`);
@@ -1714,3 +1701,45 @@ function beginGamePlay() {
   // while (submarine4IsMoving === false) {
   submarine4Mov(randomMovement());
 }
+let minutes = 0;
+let seconds = 0;
+let milliseconds = 0;
+let rawCount = 0;
+function timeLapse() {
+  const millisec = setInterval(() => {
+    rawCount++;
+    milliseconds++;
+    if (milliseconds === 1000) {
+      milliseconds = 0;
+    }
+    // console.log(milliseconds);
+    document.getElementById(
+      "milliseconds"
+    ).innerHTML = milliseconds.toString().padStart("3", 0);
+  }, 10);
+  const secMin = setInterval(() => {
+    seconds++;
+    document.getElementById(
+      "seconds"
+    ).innerHTML = `${seconds.toString().padStart("2", 0)}:`;
+
+    if (seconds > 59) {
+      seconds = 0;
+      minutes++;
+      document.getElementById(
+        "minutes"
+      ).innerHTML = `${minutes.toString().padStart("2", 0)}:`;
+    }
+    if (minutes > 2) {
+      gameOver();
+      document.getElementById("timer").innerHTML = "GAME OVER";
+    }
+  }, 1000);
+}
+const tempArray = [];
+grid.addEventListener("click", (event) => {
+  console.log(event.target.id);
+  event.target.classList.add("sanctum5");
+  tempArray.push(event.target.id);
+  console.log(tempArray);
+});
