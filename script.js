@@ -891,7 +891,7 @@ function audioOn() {
   document.getElementById("speaker").src = "speaker1.png";
   sonarAudio = setInterval(() => {
     audioPlayer.play();
-  }, 3000);
+  }, 2500);
   sonarIsPlaying = true;
   return;
 }

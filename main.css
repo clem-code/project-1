@@ -72,11 +72,15 @@ button {
   align-items: center;
   flex-direction: row;
   margin: 0  0 50px 0;
+ 
 }
+
 .gameboard {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  border: 1px solid #e25822;
+
 }
 .scoreboard {
   height: 300px;
@@ -117,6 +121,8 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin: 50px;
+
 }
 .grid {
   display: flex;
@@ -170,24 +176,7 @@ button {
   font-family: VT323;
   font-size: 30px;
 }
-@keyframes pulse1 {
-  0%,
-  100% {
-    background-color: crimson;
-  }
-  50% {
-    background-color: #e25822;
-  }
-}
 
-@keyframes pulse {
-  0% {
-    background-color: mediumblue;
-  }
-  100% {
-    background-color: darkblue;
-  }
-}
 .jewel {
   background-image: url("jewel.png");
   background-repeat: no-repeat;
@@ -214,26 +203,7 @@ button {
   animation: pulse2 2s infinite;
 }
 
-@keyframes pulse2 {
-  0%, 100% {
-    background-color: midnightblue;
-  }
-  30%, 70%{
-    background-color: mediumblue;
-  }
-  40%,60% {
-    background-color: turquoise;
-  }
-  45%, 55%{
-    background-color: yellowgreen;
-  }
-  48%, 52%{
-    background-color: chartreuse;
-  }
-  50%{
-    background-color: lime;
-  }
-}
+
 
 .submarine {
   background-image: url("subred.png");
@@ -270,6 +240,49 @@ footer{
 #timer{
   animation: pulse3 2s infinite;
 }
+
+.maps{
+  /* color: white */
+}
+
+@keyframes pulse {
+  0% {
+    background-color: mediumblue;
+  }
+  100% {
+    background-color: darkblue;
+  }
+}
+@keyframes pulse1 {
+  0%,
+  100% {
+    background-color: crimson;
+  }
+  50% {
+    background-color: #e25822;
+  }
+}
+@keyframes pulse2 {
+  0%, 100% {
+    background-color: midnightblue;
+  }
+  30%, 70%{
+    background-color: mediumblue;
+  }
+  40%,60% {
+    background-color: turquoise;
+  }
+  45%, 55%{
+    background-color: yellowgreen;
+  }
+  48%, 52%{
+    background-color: chartreuse;
+  }
+  50%{
+    background-color: lime;
+  }
+}
+
 @keyframes pulse3 {
   0%,
   100% {
@@ -278,7 +291,4 @@ footer{
   50% {
     background-color: crimson;
   }
-}
-.maps{
-  /* color: white */
 }
