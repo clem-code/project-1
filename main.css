@@ -109,6 +109,15 @@ button {
 #star{
   margin: 5px, 5px, 5px, 5px;
 }
+#speaker{
+  margin: 0 0 0 0;
+  width: 40px;
+}
+#audio{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .grid {
   display: flex;
   flex-direction: row;
