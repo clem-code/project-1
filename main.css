@@ -71,6 +71,7 @@ button {
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
+  margin: 0  0 50px 0;
 }
 .gameboard {
   display: flex;
@@ -104,6 +105,9 @@ button {
 }
 #scoreSpan {
   color: #e25822;
+}
+#star{
+  margin: 5px, 5px, 5px, 5px;
 }
 .grid {
   display: flex;

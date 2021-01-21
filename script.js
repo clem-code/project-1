@@ -1732,6 +1732,7 @@ function timeLapse() {
       ).innerHTML = `${minutes.toString().padStart("2", 0)}:`;
     }
     if (minutes > 2) {
+      notifications.innerHTML = "⏰TIME'S UP!⏰";
       gameOver();
       document.getElementById("timer").innerHTML = "GAME OVER";
     }
