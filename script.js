@@ -12,7 +12,7 @@ const width = 20;
 const cells = [];
 const jewels = [];
 let curScore = 0;
-let currentLives = 2;
+let currentLives = 3;
 scoreSpan.textContent = curScore;
 const leftMov = -1;
 const rightMov = 1;
@@ -907,7 +907,7 @@ mapChoice.forEach((button, index) => {
     const selection = parseInt(event.target.getAttribute("map"));
     buildWall(selection);
     document.getElementById("grid").scrollIntoView();
-    document.querySelector(".maps").innerHTML = "<h2>MAPS</h2>";
+    document.querySelector(".maps").innerHTML = "<h2>PICK A MAP</h2>";
   });
 });
 //assigning the map
@@ -1085,22 +1085,23 @@ function beginGamePlay() {
   // let directionOfTravel;
 
   document.addEventListener("keyup", (event) => {
-    if (event.key === "w" || event.key === "W") {
+    event.preventDefault();
+    if (event.key === "w" || event.key === "W" || event.key === "ArrowUp") {
       console.log(`You hit ${event.key}`);
       pacmanOrientation = "rotateZ(-0.25turn)";
       movChange(upMov);
     }
-    if (event.key === "a" || event.key === "A") {
+    if (event.key === "a" || event.key === "A" || event.key === "ArrowLeft") {
       console.log(`You hit ${event.key}`);
       pacmanOrientation = "rotateY(3.142rad)";
       movChange(leftMov);
     }
-    if (event.key === "s" || event.key === "S") {
+    if (event.key === "s" || event.key === "S" || event.key === "ArrowDown") {
       console.log(`You hit ${event.key}`);
       pacmanOrientation = "rotateZ(90deg)";
       movChange(downMov);
     }
-    if (event.key === "d" || event.key === "D") {
+    if (event.key === "d" || event.key === "D" || event.key === "ArrowRight") {
       console.log(`You hit ${event.key}`);
       pacmanOrientation = "rotateY(0deg)";
       movChange(rightMov);
@@ -1736,10 +1737,11 @@ function timeLapse() {
     }
   }, 1000);
 }
-const tempArray = [];
-grid.addEventListener("click", (event) => {
-  console.log(event.target.id);
-  event.target.classList.add("sanctum5");
-  tempArray.push(event.target.id);
-  console.log(tempArray);
-});
+
+// const tempArray = [];
+// grid.addEventListener("click", (event) => {
+//   console.log(event.target.id);
+//   event.target.classList.add("sanctum5");
+//   tempArray.push(event.target.id);
+//   console.log(tempArray);
+// });
