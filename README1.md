@@ -22,7 +22,7 @@ Technologies Used:
 
 The Game:
 
-*Hunt for the Red October* is a 2D, single-player, grid-based-game inspired by Pacman. I modelled the basic logic of the game on the arcade classic but took inspiration from the equally classic 1990 submarine thriller when building the design, the gameplay, and the UX. 
+*Hunt for the Red October* is a 2D, single-player, grid-based-game inspired by Pacman. I modelled the basic logic of the game on the arcade classic but took inspiration from the equally classic 1990 submarine thriller when building the gameplay, the UI, and the UX. 
 
 The aim of the game is to collect all the sunken treasure within the time limit whilst evading enemy submarines. The game ends when the all the treasure is collected, the three-minute time limit expires, or the player loses all their lives.
 
@@ -104,8 +104,84 @@ This sounds really simple, but in fact mapping the junction cells onto the grid 
 
 Detecting Contact
 
+Although they have different strategies, all four of the NPCs will cause Pacman to lose a life if he comes into contact with them. How does this work? Well, in the background of the game a set interval is running that is constantly checking to see if anyone of the NPCs are in the same cell on the grid as Pacman. If they are then he will lose a life!
 
+_Gameplay & UX_
+
+Pacman is a beautifully simple game and I've tried to keep the layout and the gameplay of Hunt for the Red October as intuitive as possible.
+
+<img src='gameflow.png'>
+
+The game can be played with two clicks: one to select the map, and a second to begin the gameplay.
+
+Once the game is playing the game can be reset by clicking the 'Reset' button which appears in place of the 'Start' button.
+
+The controls are equally pared down: using old-school WASD controls the player can direct Pacman up using 'w', down using 's', left using 'a', and right using 'd'.
+
+One bug I noticed when I was test running the game was that if the player accidentally hits capslock then the controls won't work. To combat this I made sure the controls weren't case-sensitive. Also, I realized that some players might prefer using the arrow keys, so I enabled those as controls as well. 
+
+If the player wins (or loses) the game play ends, the board clears, a message (and a surprise image!) appears and after a few seconds the player is returned to the opening screen.
+
+
+Scoreboards and notice boards... 
+
+Adjacent to the grid are four boxes:
+
+1. One contains the 'Start'/'Reset' button. 
+1. The second contains the scoreboard: this shows the all-time high score, a dynamically updated visual of the score of the present game, and shows the number of lives the player has.
+1. The third is a message board: it flashes messages about the time remaining, if a life is gained or lost, and shows different messages depending on the outcome of the game.
+1. The fourth displays the time in minutes, seconds, and milliseconds. 
+
+
+Other UX considerations
+* To avoid edge cases I wanted to make the layout as bug-proof as possible. This is why once a map is selected all the map buttons disappear unless the game is reset or ends organically.
+* Likewise, as soon as it is hit the 'Start' button is replaced by the 'Reset' button.
+* I wanted to keep all the action on the same page whilst keeping the different parts of the interface segmented. I think the simple, two-part design looks good. The navigation is done through the map choice buttons -- once you click on the map you want to play, the screen scrolls down to the grid, and the selected map is loaded onto the screen.
  
+_UI_
+
+Colour palette: I kept this simple, as well. The basic colours are black and a firey shade of red (#e25822). I also used Crimson from some of the font and for the pulsating animation on the two notice boards.
+For the grid I used Midnight Blue for the open water cells, a sandy yellow for the walls, and a Medium Blue for the sanctuary cells. Pacman's sonar radiates between Midnight Blue and Lime.
+
+Font: I used VT323 from Google Fonts to try and replicate a classic arcade font.
+
+There are a couple of nods in the UI to the submarine theme. The top of the page has a [soviet star](https://thenounproject.com/search/?q=communism&i=2356924)--a nice reference to the subject matter of the film *The Hunt for the Red October*. The sanctuary section of each map is in the shape of a crosshair. The pulsating colours in the grid are an homage to the flashing screens in the control room. Finally, I added a [sonar sound](https://freesound.org/people/Divinux/sounds/198412/). This can be toggled on and off through the microphone icon at the very bottom of the page. 
 
 
+_The Process_
 
+Before I wrote a single line of code I made a rough plan for the week. It looked like this:
+* Thursday: make the grid
+* Friday: code out Pacman's movements
+* Saturday through Monday: work on the NPCs
+* Tuesday: building the UX and sorting out the UI
+* Wednesday: Animation, UX, UI, cont.
+* Thursday: debugging and tweaking.
+
+How did it work out? Well, I had an MVP by Tuesday so overall I was able to build the bulk of the code ahead of schedule. I was particularly pleased to be able to crack the logic for the two Hunters over the weekend. Once they were behaving correctly, I was able to put the UI, UX, and gameplay together. That having been said, the UX, the UI, and the gameplay took a long time to get working right... In fact, that was probably the bulk of the latter half of the project. Adding the timer and the sonar sounds created a number of design complications that I had to iron out. Just getting the map choice buttons working properly took about half a day!
+
+_Wins_
+
+Built the MVP ahead of schedule.
+
+Coding out the sonar functionality and making the Hunter submarines able to track and follow Pacman. 
+
+I was very pleased with the two-part layout and the way the game looked and worked.
+
+_Challenges_
+
+Javacript fundamentals: although this was all built with Vanilla JS, there was so much code involved in building the project that it was a real crash-course in array methods, set intervals, HTML classes, and functions. It all worked out well in the end but there was a lot of heartbreak along the way!
+
+UX -- I didn't hit on the two-part look until Tuesday and Wednesday. Making that work involved a lot of wrestling with margins and flexbox. In retrospect it would have been bitter to start out with a clear design rather than reorganizing thing everything half way through the project...  
+
+Writing clean code. There was a lot of moving parts in this -- streamlining the code was an endless process.
+
+_Potential Improvements_
+
+Allowing Pacman to fire torpedoes at the NPCs.
+
+Making the speed at which the NPCs move increase as the game wears on.
+
+Experimenting with alternative ways of making the NPCs track Pacman -- using breadth first search, for example.
+
+Mobile compatibility.

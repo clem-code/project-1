@@ -413,7 +413,6 @@ const map2Wall = [
   "87",
   "64",
   "44",
-
   "92",
   "94",
   "95",
@@ -421,7 +420,6 @@ const map2Wall = [
   "98",
   "75",
   "55",
-
   "166",
   "165",
   "164",
@@ -932,7 +930,7 @@ function buildWall(selection) {
     cell.setAttribute("column", Math.floor(index % width));
     grid.appendChild(cell);
     cells.push(cell);
-    cell.innerHTML = index;
+    // cell.innerHTML = index;
     cell.style.width = 100 / width + "%";
     cell.style.height = 100 / width + "%";
   }
@@ -1148,7 +1146,7 @@ function beginGamePlay() {
           cells[pacman].classList.add("pacman");
           cells[pacman].style.transform = pacmanOrientation;
         }
-      }, 250);
+      }, 400);
     }
   }
   function sonar() {
@@ -1366,7 +1364,7 @@ function beginGamePlay() {
   sub1MovFunc = setInterval(() => {
     let newDirection = findPacMan();
     directionCheck(newDirection);
-  }, 350);
+  }, 550);
 
   //SUBMARINE 2 MOVEMENT
   function findPacMan2() {
@@ -1473,7 +1471,7 @@ function beginGamePlay() {
   sub2MovFunc = setInterval(() => {
     let newDirection = findPacMan2();
     directionCheck2(newDirection);
-  }, 350);
+  }, 550);
 
   //modal triggered on death
   function deathModal() {
@@ -1566,7 +1564,7 @@ function beginGamePlay() {
   alcoholHunter = setInterval(() => {
     let newDirection = findAlcohol();
     directionCheck3(newDirection);
-  }, 300);
+  }, 400);
 
   //detecting contacts between pacman and ghosts
   function detectDeath() {
@@ -1696,7 +1694,7 @@ function beginGamePlay() {
           submarine4 += direction;
           cells[submarine4].classList.add("submarine4");
         }
-      }, 300);
+      }, 400);
     }
   }
   // while (submarine4IsMoving === false) {
@@ -1732,17 +1730,17 @@ function timeLapse() {
       ).innerHTML = `${minutes.toString().padStart("2", 0)}:`;
     }
     if (minutes > 2) {
-      notifications.innerHTML = "⏰TIME'S UP!⏰";
+      // notifications.innerHTML = ;
       gameEnd();
-      document.getElementById("timer").innerHTML = "GAME OVER";
+      document.getElementById("timer").innerHTML = "⏰TIME'S UP!⏰";
     }
-    if (minutes > 1) {
+    if (minutes === 1 && seconds === 59) {
       notifications.innerHTML = "⏰ONE MINUTE LEFT⏰";
       setTimeout(() => {
         notifications.innerHTML = "ON ACTIVE PATROL";
       }, 2000);
     }
-    if (minutes > 0) {
+    if (minutes === 0 && seconds === 59) {
       notifications.innerHTML = "⏰TWO MINUTES LEFT⏰";
       setTimeout(() => {
         notifications.innerHTML = "ON ACTIVE PATROL";
