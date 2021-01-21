@@ -1733,8 +1733,20 @@ function timeLapse() {
     }
     if (minutes > 2) {
       notifications.innerHTML = "⏰TIME'S UP!⏰";
-      gameOver();
+      gameEnd();
       document.getElementById("timer").innerHTML = "GAME OVER";
+    }
+    if (minutes > 1) {
+      notifications.innerHTML = "⏰ONE MINUTE LEFT⏰";
+      setTimeout(() => {
+        notifications.innerHTML = "ON ACTIVE PATROL";
+      }, 2000);
+    }
+    if (minutes > 0) {
+      notifications.innerHTML = "⏰TWO MINUTES LEFT⏰";
+      setTimeout(() => {
+        notifications.innerHTML = "ON ACTIVE PATROL";
+      }, 2000);
     }
   }, 1000);
 }
