@@ -1013,6 +1013,7 @@ function beginGamePlay() {
     }
   });
   // make pacman
+
   pacman = pacmanCreator();
   cells[pacman].classList.add("pacman");
   //make subs
@@ -1027,12 +1028,13 @@ function beginGamePlay() {
   //alcohol prize creator
   alcohol = alcoholCreator();
   cells[alcohol].classList.add("alcohol");
-  //creation code
+  // creation code
   function pacmanCreator() {
     const randJewel = Math.floor(Math.random() * jewels.length);
     // console.log(parseInt(jewels[randJewel].id));
     return parseInt(jewels[randJewel].id);
   }
+  //sub creators
   function sub1Creator() {
     const filteredSanctum = sanctum1.filter((cell) => {
       if (!cells[cell].classList.contains("wall")) {
