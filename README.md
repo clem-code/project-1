@@ -388,7 +388,7 @@ I was very pleased with the two-part layout and the way the game looked and work
 
 Javacript fundamentals: although this was all built with Vanilla JS, there was so much code involved in building the project that it was a real crash-course in array methods, set intervals, HTML classes, and functions. It all worked out well in the end but there was a lot of heartbreak along the way!
 
-UX -- I didn't hit on the two-part look until Tuesday. Making that work involved a lot of wrestling with margins and flexbox. In retrospect it would have been bitter to start out with a clear design rather than reorganizing thing everything half way through the project...  
+UX -- I didn't hit on the two-part look until Tuesday. Making that work involved a lot of wrestling with margins and flexbox. In retrospect it would have been better to start out with a clear design rather than reorganizing thing everything half way through the project...  
 
 Writing clean code. There was a lot of moving parts in this -- streamlining the code was an endless process.
 
