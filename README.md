@@ -28,8 +28,7 @@ The aim of the game is to collect all the sunken treasure within the time limit 
 
 Play the deployed version here:
 
-[https://clem-code.github.io/project-1/
-]()
+<a href='https://clem-code.github.io/project-1/' target='_blank' >https://clem-code.github.io/project-1/</a>
 
 
 <img align = 'center' src='gameplay.gif' >
