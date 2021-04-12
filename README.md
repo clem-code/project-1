@@ -400,3 +400,8 @@ Making the speed at which the NPCs move increase as the game wears on.
 Experimenting with alternative ways of making the NPCs track Pacman -- using breadth first search, for example.
 
 Mobile compatibility.
+
+### _Key Takeaways_
+
+This project taught me a lot about the problem-solving process -- I spent two days thinking about the problem of how to make the submarines track down Pacman. It was frustrating right up until the moment when I started to get it! This taught me the importance of grit and determination in the face of a complex problem.
+On the technical side, I gained a lot of confidence with Flexbox whilst working on the game. I also finally got really comfortable with the use of set intervals!
